@@ -1,0 +1,36 @@
+---
+const { title = 'Nadavs awesome website' } = Astro.props
+// import "@fontsource-variable/josefin-sans"
+import Nav from "../components/Nav"
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Digital Artist services, accessible for everyone."
+    />
+    <meta title={title} />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
+    integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+
+  </head>
+  <body class="">
+    <Nav client:load />
+  </body>
+</html>
+<main>
+  <slot />
+  <!-- Page Content -->
+  <footer class="mt-12 bg-black px-8 py-12 md:px-16 lg:px-32">
+    <div></div>
+  </footer>
+</main>
+
+<style>
+  body {
+    font-family: "Josefin Sans Variable", sans-serif;
+  }
+</style>
