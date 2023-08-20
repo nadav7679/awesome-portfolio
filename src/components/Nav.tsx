@@ -43,7 +43,8 @@ export default function Nav() {
             </div>
 
             {toggled&& 
-            <div className='flex fixed bg-white left-0 bottom-0 w-full h-screen items-center justify-center'>
+            <div className="fixed left-0 top-0  z-40 flex h-screen
+            w-full flex-col items-center  justify-center  gap-24 bg-white text-2xl font-bold">
                 <div className='flex flex-col gap-12 text-lg'>
                     <a href="/">Home</a>
                     <a href="/projects">Projects</a>
