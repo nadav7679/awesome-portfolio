@@ -1,50 +1,101 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<span>
-		<img width="200" src="me.jpeg" class="float-left mx-5 rounded-md"/>
-	</span>
-		
-	<div class="relative mx-12 flex left-0 w-120 flex-col items-center justify-center">
-		<h1 class="text-4xl">
-			Coding is <span class="font-bold">my life</span>.
-		</h1>
+  <span>
+    <img width="200" src="me.jpeg" class="float-left mx-5 rounded-md" />
+  </span>
 
-		<div class="relative">
-			<p class="p-2 text-lg">
-				Nadav is not only a "programmer", as you may well know. Nadav is
-				<span class="font-bold text-primary">the programmer</span>. <br />
-				Usually, when people speak about programming, they don't mention Nadav. This is 
-				obviously wrong. Now, when you think about programming, you should think Nadav.
-				This way of thinking has brought many employers forward for years on end. It is said 
-				that Elon Musk had the same thought. Before coming up with paypal or something.
-				<br />
-				Now, What does it mean to <span class="italic">think</span>?
-				Thinking
-			</p>
-			<p class="p-2 text-lg">
-				Another thing to think about is this.
-			</p>
-		</div>
-		<h2 class="text-xl font-bold">
-			And what do we know about thinking?
-		</h2>
-		<div class="relative">
-			<p class="p-2 text-lg">
-				We know nothing, i'll tell you that. We know less than Jon Snow. Which is nothing, beacuse
-				it is known that Jon Snow knows nothing. Actually, it means we know less than nothing.
-			</p>
-		</div>
-		<div class="relative">
-			<h2 class="text-xl font-bold">
-			How about som graphs?
-			</h2>
-			<img width=400 src="periodic.png" />
-			<p class="p-2 text-lg">
-				Here are dem graphs for ya. Yeah they good graphs aint them?
-			</p>
-		</div>
-	</div>
+  <div
+    class="relative mx-32 flex left-0 flex-col items-center justify-center"
+  >
+    <h1 class="text-4xl">
+      Coding is <span class="font-bold">my life</span>.
+    </h1>
+
+    <div class="relative">
+      <svg class="absolute h-full w-full overflow-visible">
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style={{ stopColor: "#DC3A2B", stopOpacity: 1 }}
+            ></stop>
+            <stop offset="100%" style={{ stopColor: "#E18510", stopOpacity: 1 }}
+            ></stop>
+          </linearGradient>
+        </defs>
+        <path
+          id="border-path"
+          fill="none"
+          stroke="url(#gradient)"
+          stroke-width="4"></path>
+      </svg>
+
+      <p id="anim-p" class="p-2 text-lg">
+        Nadav is not only a "programmer", as you may well know. Nadav is
+        <span class="font-bold text-primary">the programmer</span>. <br />
+        Usually, when people speak about programming, they don't mention Nadav. This
+        is obviously wrong. Now, when you think about programming, you should think
+        Nadav. This way of thinking has brought many employers forward for years
+        on end. It is said that Elon Musk had the same thought. Before coming up
+        with paypal or something.
+        <br />
+        Now, What does it mean to <span class="italic">think</span>? Thinking
+      </p>
+      <p class="p-2 text-lg">Another thing to think about is this.</p>
+    </div>
+    <h2 id="anim-h" class="text-xl font-bold">
+      And what do we know about thinking?
+    </h2>
+    <div class="relative">
+      <p class="p-2 text-lg">
+        We know nothing, i'll tell you that. We know less than Jon Snow. Which
+        is nothing, beacuse it is known that Jon Snow knows nothing. Actually,
+        it means we know less than nothing.
+      </p>
+    </div>
+    <div class="relative">
+      <h2 class="text-xl font-bold">How about som graphs?</h2>
+      <img width="400" src="periodic.png" />
+      <p class="p-2 text-lg">
+        Here are dem graphs for ya. Yeah they good graphs aint them?
+      </p>
+    </div>
+  </div>
+
+  <style>
+    #border-path {
+      animation: draw 1s forwards 1s ease-out;
+    }
+
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  </style>
+
+  <script>
+    function updatePath() {
+      const textMain = document.querySelector("#anim-p") as HTMLElement;
+      const path = document.querySelector("#border-path") as SVGPathElement;
+
+      if (textMain && path) {
+        path.setAttribute(
+          "d",
+          `M0,0 V${textMain.offsetHeight} H${textMain.offsetWidth} v${
+            textMain.offsetHeight / 2
+          }`
+        );
+        const pathLength = path.getTotalLength();
+
+        path.style.strokeDasharray = pathLength.toString();
+        path.style.strokeDashoffset = pathLength.toString();
+      }
+    }
+    // Update the path when the page loads
+    window.addEventListener("DOMContentLoaded", updatePath);
+    // Update the path when the window is resized
+    window.addEventListener("resize", updatePath);
+  </script>
 </Layout>
