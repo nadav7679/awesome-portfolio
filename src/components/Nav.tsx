@@ -1,5 +1,5 @@
-import { FaGithub, FaLinkedin, FaBars } from 'react-icons/fa';
-import { useState } from 'react';
+import { FaHome, FaClipboard, FaTimes, FaGithub, FaLinkedin, FaBars } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Nav() {
   const [toggled, setToggled] = useState(false);
@@ -11,12 +11,11 @@ export default function Nav() {
         <a href="https://www.linkedin.com/in/nadav7679/">
           <FaLinkedin size={50} />
         </a>
-        
+
         <a href="https://github.com/nadav7679">
           <FaGithub size={50} />
         </a>
       </div>
-
 
       <div className="basis-3/12">
         {/* solid line */}
@@ -33,17 +32,24 @@ export default function Nav() {
         <span className="block h-0.5 w-8 bg-black"></span>
         <span className="block h-0.5 w-8 bg-black"></span> */}
 
-        <FaBars size={30}/>
+        <FaBars size={30} />
       </div>
 
       {toggled && (
         <div
           className="fixed left-0 top-0 z-40 flex h-screen
-            w-full flex-col items-center  justify-center  gap-24 bg-white text-2xl font-bold"
+            w-full flex-col items-center justify-center gap-24 backdrop-blur-xl text-2xl font-bold"
         >
-          <div className="flex flex-col gap-12 text-lg">
-            <a href="/">Home</a>
-            <a href="/projects">Projects</a>
+          <div className="flex flex-col gap-12 text-3xl basis-30">
+            <a href="/" className="flex"> <FaHome /> &nbsp; Home</a>
+            <a href="/projects" className="flex"> <FaClipboard/> &nbsp; Projects</a>
+          </div>
+
+          <div
+            className="cursor-pointer"
+            onClick={() => setToggled((prevToggled) => !prevToggled)}
+          >
+            <FaTimes />
           </div>
         </div>
       )}
