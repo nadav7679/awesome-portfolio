@@ -18,5 +18,11 @@ export default defineConfig({
         // Katex plugin options
         }]
     ]
-  }
+  },
+  vite: {
+    ssr: {
+      noExternal: ["react-icons"],
+    },
+  },
+
 });

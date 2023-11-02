@@ -1,7 +1,5 @@
-import pkg from 'react-icons/fa';
+import { FaHome, FaClipboard, FaTimes, FaGithub, FaLinkedin, FaBars } from "react-icons/fa";
 import { useState } from "react";
-
-const { FaLinkedin, FaGithub, FaBars, FaHome, FaClipboard, FaTimes } = pkg;
 
 export default function Nav() {
   const [toggled, setToggled] = useState(false);
