@@ -21,6 +21,9 @@ import Nav from "../components/Nav"
     <Nav client:load />
   </body>
 </html>
+<h1 class="title">
+  this is my projects i like do
+</h1>
 <main>
   <slot />
   <!-- Page Content -->
@@ -32,5 +35,22 @@ import Nav from "../components/Nav"
 <style>
   body {
     font-family: "Josefin Sans Variable", sans-serif;
+  }
+</style>
+
+<style>
+  .title {
+
+      animation: fadeInAnimation ease 3s;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+  }
+  @keyframes fadeInAnimation {
+      0% {
+          opacity: 0;
+      }
+      100% {
+          opacity: 1;
+      }
   }
 </style>

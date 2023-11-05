@@ -1,76 +1,77 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import portrait from "/me.jpeg";
 ---
 
-<Layout>
-  <span>
-    <img width="200" src="me.jpeg" class="float-left mx-5 rounded-md" />
-  </span>
+<Layout title="Nadav Port | Home">
+  <main>
+    <div class="flex flex-col-reverse md:flex-row justify-center items-center">
+      <div class="w-[350px] md:w-[450px]">
+        <svg class="absolute h-full w-full overflow-visible">
+          <defs>
+            <linearGradient id="gradient" x1="20%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style={{ stopColor: "#DC3A2B", stopOpacity: 1 }}
+              ></stop>
+              <stop
+                offset="100%"
+                style={{ stopColor: "#E18510", stopOpacity: 1 }}></stop>
+            </linearGradient>
+          </defs>
+          <path
+            id="border-path"
+            fill="none"
+            stroke="url(#gradient)"
+            stroke-width="4"></path>
+        </svg>
 
-  <div
-    class="relative mx-32 flex left-0 flex-col items-center justify-center"
-  >
-    <h1 class="text-4xl">
-      Coding is <span class="font-bold">my life</span>.
-    </h1>
-
-    <div class="relative">
-      <svg class="absolute h-full w-full overflow-visible">
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style={{ stopColor: "#DC3A2B", stopOpacity: 1 }}
-            ></stop>
-            <stop offset="100%" style={{ stopColor: "#E18510", stopOpacity: 1 }}
-            ></stop>
-          </linearGradient>
-        </defs>
-        <path
-          id="border-path"
-          fill="none"
-          stroke="url(#gradient)"
-          stroke-width="4"></path>
-      </svg>
-
-      <p id="anim-p" class="p-2 text-lg">
-        Nadav is not only a "programmer", as you may well know. Nadav is
-        <span class="font-bold text-primary">the programmer</span>. <br />
-        Usually, when people speak about programming, they don't mention Nadav. This
-        is obviously wrong. Now, when you think about programming, you should think
-        Nadav. This way of thinking has brought many employers to greatness for years
-        on end. It is said that Elon Musk had the same thought before coming up
-        with paypal or some shit...
-        <br />
-        Now, What does it mean to <span class="italic">think</span>? Thinking is something we do with our minds.
-		Nadav, has a lot of mind. Therefore Nadav is doing a great amount of thinking.
-      </p>
-      <p class="p-2 text-lg">Another thing to think about is this:</p>
+        <h1 class="font-bold text-3xl md:text-5xl tracking-tight mb-1 glitch">
+          Nadav Port
+        </h1>
+        <h2 class="text-lg mt-2 glitch">
+          Math masters student looking for a new financial journey!
+        </h2>
+        <p id="anim-p" class="mt-4 text-left">
+          Welcome to my little corner of the web! I am *not* a civil engineer
+          graduated from National Autonomous University of Mexico (UNAM) who
+          decided to break into tech in his late 20s. I am *not* interested in <strong
+            >web developement</strong
+          >, <strong>UI/UX design</strong> and <strong>data analysis.</strong>
+        </p>
+        <!-- might need work on the size of the god damn picture. All of the w-[something] and md:w-[something] -->
+      </div>
+      <img
+        id="pfp-1"
+        class="mb-10 md:mb-0 h-[200px] w-[150px] md:h-[340px] md:w-[255px] rounded-full ml-0 md:ml-10"
+        src={portrait}
+        alt="Nadav Port"
+      />
     </div>
-    <h2 id="anim-h" class="text-xl font-bold">
-      And what do we know about thinking?
-    </h2>
-    <div class="relative">
-      <p class="p-2 text-lg">
-        We know nothing, i'll tell you that. We know less than Jon Snow, which
-        is nothing, beacuse it is known that Jon Snow knows nothing. Actually,
-        it means we know less than nothing. How can we know less than nothing? 
-		Does knowing less then nothing means to know something? Or does it mean that the next thing
-		you learn is instantly forgot, until you reach the point of knowing nothing. <br />
-		Maybe that's what happend to Jon Snow, that's something to think about...
-      </p>
-    </div>
-    <div class="relative">
-      <h2 class="text-xl font-bold">How about som graphs?</h2>
-      <img width="400" src="periodic.png" class="flex items-center " />
-      <p class="p-2 text-lg">
-        Here are dem graphs for ya. Yeah they good graphs aint them? They look good ain't dey?
-		Nadav is said to have the best graphs in the country. All of the people that know about graphs
-		come and tell me "those are some damn good graphs, 'adav". They call me 'adav cuz' wer'e friends.
 
-      </p>
+    <div class="flex justify-center items-center my-10 md:my-16">
+      <div class="w-[350px] md:w-[740px]">
+        <h2 class="text-3xl font-bold">Projects</h2>
+        <p class="mt-4 text-left">
+          Over my years in acedemia and army service I had completed quite a few
+          projects. The projects regard a viraty of STEM disiplens, including
+          numerical anaylsis of PDE's, mathematical modelling, nonlinear
+          dynamics, DevOps and computer networking, (basic) machine learning,
+          and data science. The details of the projects are in the links below.
+        </p>
+        <div
+          class="grid grid-cols-2 gap-y-5 md:grid-cols-3 md:gap-y-8 md:gap-x-4 mt-10 ml-14"
+        >
+          <span>Hi</span>
+          <span>Hi</span>
+          <span>Hi</span>
+          <span>Hi</span>
+          <span>Hi</span>
+          <span>Hi</span>
+        </div>
+      </div>
     </div>
-  </div>
+  </main>
 
-  <style>
+  <!-- <style>
     #border-path {
       animation: draw 1s forwards 1s ease-out;
     }
@@ -80,7 +81,7 @@ import Layout from "../layouts/Layout.astro";
         stroke-dashoffset: 0;
       }
     }
-  </style>
+  </style> -->
 
   <script>
     function updatePath() {

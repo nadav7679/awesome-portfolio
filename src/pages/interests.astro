@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Nadav Port | Interests">
+
+  <div class="relative mx-32 flex left-0 flex-col items-center justify-center">
+    <h1 id="title" class="title text-5xl">
+      Basically, I'm a <span class="font-bold">nerd</span>.
+    </h1>
+
+    
+    <div class="relative">
+      <p id="anim-p" class="p-2 text-lg fade-in">
+        Here is a list of academic topics I am interested in. If you want to chat about them, I would love for you to send a message!
+        <ul>
+          <li>Numerical analysis of PDE's</li>
+          <li>Cognitive science and theories of consciousness</li>
+          <li>Rockets and Mars colonization</li>
+        </ul>
+        I would also love to talk about fantasy books and movies, philosophical ideas, history, and just about anything that is extraordinary!
+      </p>
+    </div>
+  </div>
+
+  <style>
+    .title {
+
+        animation: fadeInAnimation ease 3s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+    @keyframes fadeInAnimation {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+
+</Layout>
