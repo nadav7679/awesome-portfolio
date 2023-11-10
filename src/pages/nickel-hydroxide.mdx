@@ -1,0 +1,31 @@
+import MarkdownLayout from '../layouts/MarkdownLayout.astro'
+
+
+<MarkdownLayout headline="Mathematical modeling and numerical simulation of <strong>&nbspnickel-hydroxide&nbsp</strong>battery.">
+In my work, I present a mean-field model of the nickel-hydroxide (Ni(OH)2) electrode in the Edison rechargeable battery. The model aims to describe the electrode's dynamics, charge transport, and phase separation. The Poisson-Nernst-Planck equation is used to describe the charge transport, while the Cahn-Hilliard approach is used to model the phase separation. The model equations are solved numerically using MATLAB's pdepe package.
+
+The numerical solution is done in 1D, and the model equations take the following form:
+
+$$
+\begin{equation}
+0 = -n + \frac{\partial}{\partial x}(\epsilon\frac{\partial \phi}{\partial x})
+\end{equation}
+$$
+$$
+\begin{equation}
+\frac{\partial n}{\partial t} = D_n\frac{\partial}{\partial x}(\frac{\partial n}{\partial x} - n\frac{\partial \phi}{\partial x}) - \frac{\alpha}{2}(1-u)n - (1+u)(1-n)
+\end{equation}
+$$
+$$
+\begin{equation}
+\frac{\partial u}{\partial t} = D_u\frac{\partial}{\partial x}(1-u^2\frac{\partial u}{\partial x})
+\end{equation}
+$$
+
+To implement the Cahn-Hilliard fourth-order derivative, a variable $\psi$ is introduced, which is the second derivative of $u$. The numerical model is solved using MATLAB's pdepe package, which does not allow explicit 3rd or higher order derivatives.
+
+During this project, I made many changes to the model. The positive charge-carrier was omitted from the model, as it was found to be negligible. I needed to study electrochemistry, Chan-Hilliard's approach to phase separation, and different numerical methods for PDEs. This project expanded my knowledge and provided a taste of research. The results of the model successfully describe the very basic form of the material's phase change and provide a starting point for a more detailed and exact model of the electrode and battery. I would like to thank Professor Arik Yochelis for his much-appreciated help and guidance during my work on this project.
+
+In conclusion, my work presents a mean-field model of the Ni(OH)2 electrode in the Edison rechargeable battery. The model equations are solved numerically using MATLAB's pdepe package. The model describes the electrode's dynamics, charge transport, and phase separation. The presented model went through many changes during this project. The positive charge-carrier was omitted from the model, as it was found to be negligible. The numerical model is solved using MATLAB's pdepe package, which does not allow explicit 3rd or higher order derivatives. The results of the model successfully describe the very basic form of the material's phase change and provide a starting point for a more detailed and exact model of the electrode and battery. This work provides a valuable contribution to the field of rechargeable batteries and can be used as a foundation for further research.
+</MarkdownLayout>
+
