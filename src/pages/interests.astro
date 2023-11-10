@@ -3,12 +3,12 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Nadav Port | Interests">
-
+<main>
   <div class="relative mx-32 flex left-0 flex-col items-center justify-center">
     <h1 id="title" class="title text-5xl">
       Basically, I'm a <span class="font-bold">nerd</span>.
     </h1>
-
+    
     
     <div class="relative">
       <p id="anim-p" class="p-2 text-lg fade-in">
@@ -22,22 +22,23 @@ import Layout from "../layouts/Layout.astro";
       </p>
     </div>
   </div>
-
+</main>
+  
   <style>
     .title {
-
+      
         animation: fadeInAnimation ease 3s;
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
     }
     @keyframes fadeInAnimation {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
-</style>
+  </style>
 
 </Layout>

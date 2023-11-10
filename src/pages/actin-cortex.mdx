@@ -1,0 +1,37 @@
+import MarkdownLayout from '../layouts/MarkdownLayout.astro'
+
+
+<MarkdownLayout headline="Mathematical modeling and numerical simulation of&nbsp<span class='font-bold'>actin cortex</span>&nbspgrow.">
+Actin cortex formation is a fascinating senior year physics project that explores the role of actin proteins in supporting and moving animal cell membranes. The study, conducted by Nadav Porat and advised by Prof. Arik Yochelis, focuses on the numerical analysis of actin polymerization and depolymerization. The actin cortex is a thin layer of actin filaments that lies beneath the plasma membrane of animal cells. It plays a crucial role in maintaining cell shape and providing mechanical support to the cell.
+
+The study uses a mean-field model to describe the dynamics of actin polymerization and depolymerization. The model takes into account the concentration of actin monomers, the rate of nucleation, and the rate of filament elongation. The model predicts that the actin cortex is a highly dynamic structure that is constantly undergoing remodeling. The equations used in the model are:
+
+$$ 
+\begin{equation} 
+\frac{\partial c}{\partial t} = D\nabla^2c - k_+c + k_-f 
+\end{equation}
+$$
+
+$$
+\begin{equation} 
+\frac{\partial f}{\partial t} = k_+c - k_-f - \gamma f + \eta\nabla^2f
+\end{equation}
+$$
+
+The study also uses COMSOL Multiphysics to simulate the dynamics of actin cortex formation. The simulation takes into account the mechanical properties of the cell membrane, the concentration of actin monomers, and the rate of actin polymerization and depolymerization. The simulation predicts that the actin cortex is a highly dynamic structure that is capable of generating contractile forces. The simulation also shows that the actin cortex can undergo rapid remodeling in response to changes in the external environment. The equations used in the simulation are:
+
+$$
+\begin{equation} 
+\frac{\partial u}{\partial t} = \nabla\cdot\sigma
+\end{equation}
+$$
+
+$$
+\begin{equation}
+\sigma = \lambda\nabla\cdot uI + 2\mu\epsilon
+\end{equation}
+$$
+
+Overall, the study provides valuable insights into the complex process of actin cortex formation and highlights the importance of numerical analysis in understanding biological systems. The study is a testament to the power of interdisciplinary research and the potential for physics to shed light on biological phenomena
+</MarkdownLayout>
+
