@@ -1,0 +1,29 @@
+import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
+
+
+<MarkdownLayout headline="Mathematical modeling and numerical simulation of&nbsp<span class='font-bold'>actin cortex</span>&nbspgrow.">
+During my senior year in physics, I worked on a project that aimed to model the dynamics of actin cortex polymerization and depolymerization. The actin cortex is a thin layer of actin filaments that lies beneath the plasma membrane of eukaryotic cells. It plays a crucial role in cell mechanics, cell division, and cell motility. In this project, I developed a mean field model that describes the spatiotemporal evolution of the actin cortex. The model consists of a set of partial differential equations that capture the dynamics of actin monomers, filaments, and associated proteins.
+
+The model equations are based on mass action kinetics and incorporate various biological parameters such as the rate of nucleation, elongation, and capping of actin filaments. The equations are given by:
+$$
+\begin{equation}
+\frac{\partial m}{\partial t} = D_m \nabla^2 m - k_n m + k_p f m - k_c m f
+\end{equation}
+$$
+$$
+\begin{equation}
+\frac{\partial f}{\partial t} = D_f \nabla^2 f + k_n m - k_p f m - k_c m f
+\end{equation}
+$$
+$$
+\begin{equation}
+\frac{\partial p}{\partial t} = D_p \nabla^2 p + k_{cp} f - k_{dp} p
+\end{equation}
+$$
+where $m$, $f$, and $p$ are the concentrations of actin monomers, filaments, and associated proteins, respectively. $D_m$, $D_f$, and $D_p$ are the diffusion coefficients, and $k_n$, $k_p$, $k_c$, $k_{cp}$, and $k_{dp}$ are the reaction rate constants.
+
+To solve the model equations numerically, I used a finite difference method that discretizes the spatial domain into a grid of points and approximates the derivatives using central differences. The resulting system of ordinary differential equations was then solved using the fourth-order Runge-Kutta method, which is a widely used numerical method for solving differential equations. 
+
+The numerical results show that the model captures the essential features of actin cortex dynamics, such as the formation of traveling waves and the emergence of spatial patterns. The model also predicts the existence of stable and
+</MarkdownLayout>
+

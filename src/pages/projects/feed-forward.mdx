@@ -1,0 +1,92 @@
+import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
+
+
+<MarkdownLayout headline="The most basic Deep Neural Network, <strong>&nbspfrom scratch&nbsp</strong>.">
+This project was an assignment in a neural-computation course called Introduction to Neural Networks. We studied computational models of the brain and followed their mathematical models. Instances of the network had their weights and biases trained to solve various problems, such as recognizing MNIST digits.
+
+[Click here for the full report](https://github.com/nadav7679/introduction_to_neural_networks/blob/d2034fd792ff6b44cf11315f247ed23a693247fe/AS04%20-%20Feed-Forward%20Networks/FeedForward%20Network%20-%20Nadav%20Porat.pdf) and [here for the Python code](https://github.com/nadav7679/introduction_to_neural_networks/blob/d2034fd792ff6b44cf11315f247ed23a693247fe/AS04%20-%20Feed-Forward%20Networks/FF%20Network.py).
+
+I thoroughly enjoyed programming a dynamic Feed-Forward network in NumPy! Seeing the algorithm at work was a blast! We can observe the algorithm's results in the following picture. It was trained to recognize MNIST digits, and the histogram shows that most incidents had a near-zero error!
+
+<img class="w-6/12" src="/projects_media/feed-forward/feed-forward.png"/>
+
+The code followed the mathematical backpropagation algorithm (based on gradient descent) in J. Hertz's Introduction to Neural Computation book:
+
+<img class="w-6/12" src="/projects_media/feed-forward/book.png"/>
+
+# Code and Algorithm Explanation
+
+The full code can be found [here on Github](https://github.com/nadav7679/introduction_to_neural_networks/blob/d2034fd792ff6b44cf11315f247ed23a693247fe/AS04%20-%20Feed-Forward%20Networks/FF%20Network.py).
+
+The algorithm and the code are explained as follows:
+
+# Feedforward Computation
+
+The feedforward process involves passing the input through the network to produce an output. In each layer, the input is multiplied by the weights, and the result is passed through the activation function. The output of one layer becomes the input for the next layer.
+
+The feedforward function in the code performs this operation layer by layer:
+
+1. **Input Layer:**
+   - The input \(a\) is augmented with a bias neuron (always set to 1) and stored in the network.
+     ```python
+     a = np.append(a, 1)
+     self.network.append(a)
+     ```
+
+2. **Hidden Layers:**
+   - For each hidden layer \(m\):
+     - A bias term is added to the layer's input.
+       ```python
+       b = np.zeros(self.sizes[m] + 1)
+       b[-1] = 1
+       ```
+     - The activation of each neuron in the layer is computed using the sigmoid function.
+       ```python
+       for i in range(self.sizes[m]):
+           b[i] = g(np.dot(a, W[:, i]))
+       ```
+     - The result becomes the input for the next layer, and the activation is stored in the network.
+       ```python
+       self.network.append(b)
+       a = np.copy(b)
+       ```
+   - The final activation \(a\) is returned.
+
+# Backpropagation
+
+Backpropagation is the process of updating the weights of the neural network to minimize the error between the predicted and actual outputs. The algorithm works backward from the output layer to the input layer, adjusting weights based on the computed error gradients.
+
+The `backProp` function in the code implements backpropagation. Let's discuss the steps:
+
+1. **Output Layer Error:**
+   - Calculate the error in the output layer using the derivative of the sigmoid function.
+     ```python
+     for i in range(self.sizes[-1]):
+         self.deltas[-1][i] = g_prime(np.dot(self.network[-2], W[:, i])) * (expected[i] - output[i])
+     ```
+
+2. **Hidden Layer Error:**
+   - For each hidden layer \(m\) from the output layer to the second layer:
+     - Compute the error term for each neuron in the layer.
+       ```python
+       for j in range(self.sizes[m-1] + 1):
+           h_prev = np.dot(self.network[m-2], W_prev[:, j])
+           h = np.dot(W[j, :], self.deltas[m])
+           self.deltas[m-1][j] = g_prime(h_prev) * h
+       ```
+
+3. **Weight Update:**
+   - Update the weights using the computed error terms, the learning rate (`step`), and the activations.
+     ```python
+     for m in range(1, self.num_layers):
+         W = self.weights[m-1]
+         for i in range(np.shape(W)[1]):
+             W[:, i] += self.step * self.network[m-1] * self.deltas[m][i]
+     ```
+
+These steps are essential for the network to learn from the training data and adjust its weights to improve its performance over time. The learning rate (`step`) controls the size of the weight updates, influencing the convergence and stability of the training process.
+
+The provided Python code encapsulates these fundamental concepts of feedforward computation and backpropagation, which are core components of training neural networks.
+
+</MarkdownLayout>
+
