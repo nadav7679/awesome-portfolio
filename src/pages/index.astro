@@ -1,29 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import portrait from "/me.jpeg";
+import Card from "../components/Card.astro";
 ---
 
 <Layout title="Nadav Port | Home">
   <main>
     <div class="flex flex-col-reverse md:flex-row justify-center items-center">
       <div class="w-[350px] md:w-[450px]">
-        <svg class="absolute h-full w-full overflow-visible">
-          <defs>
-            <linearGradient id="gradient" x1="20%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style={{ stopColor: "#DC3A2B", stopOpacity: 1 }}
-              ></stop>
-              <stop
-                offset="100%"
-                style={{ stopColor: "#E18510", stopOpacity: 1 }}></stop>
-            </linearGradient>
-          </defs>
-          <path
-            id="border-path"
-            fill="none"
-            stroke="url(#gradient)"
-            stroke-width="4"></path>
-        </svg>
-
         <h1 class="font-bold text-3xl md:text-5xl tracking-tight mb-1 glitch">
           Nadav Port
         </h1>
@@ -48,7 +32,7 @@ import portrait from "/me.jpeg";
     </div>
 
     <div class="flex justify-center items-center my-10 md:my-16">
-      <div class="md:w-9/12">
+      <div class="w-[350px] md:w-[740px]">
         <h2 class="text-3xl font-bold">Projects</h2>
         <p class="mt-4 text-left">
           Over my years in acedemia and army service I had completed quite a few
@@ -57,66 +41,27 @@ import portrait from "/me.jpeg";
           dynamics, DevOps and computer networking, (basic) machine learning,
           and data science. The details of the projects are in the links below.
         </p>
+      </div>
+    </div>
+    <div class="flex flex-col-reverse md:flex-row justify-center items-center">
+      <div class="w-[550px] md:w-[950px]">
         <div
           class="grid grid-cols-2 gap-y-5 md:grid-cols-3 md:gap-y-8 md:gap-x-4 mt-10 ml-14"
         >
-          <a
-            href="/actin-cortex"
-            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-            style="display: block"
-          >
-            Actin Cortex
-          </a>
-          <span>Hi</span>
-          <span>Hi</span>
-          <a
-            href="/nickel-hydroxide"
-            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-            style="display: block"
-          >
-            Nickel-Hydroxide
-          </a>
-          <span>Hi</span>
-          <span>Hi</span>
-          <span>Hi</span>
+          <Card
+            title="Nickel Hydroxide"
+            image="nickel.jpg"
+            description="The hydroxide of nickel"
+            link="/nickel-hydroxide"
+          />
+          <Card
+            title="Actin Cortex"
+            image="poly_depoly.jpg"
+            description="The cortex of the actin"
+            link="/actin-cortex"
+          />
         </div>
       </div>
     </div>
   </main>
-
-  <!-- <style>
-    #border-path {
-      animation: draw 1s forwards 1s ease-out;
-    }
-
-    @keyframes draw {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
-  </style> -->
-
-  <script>
-    function updatePath() {
-      const textMain = document.querySelector("#anim-p") as HTMLElement;
-      const path = document.querySelector("#border-path") as SVGPathElement;
-
-      if (textMain && path) {
-        path.setAttribute(
-          "d",
-          `M0,0 V${textMain.offsetHeight} H${textMain.offsetWidth} v${
-            textMain.offsetHeight / 2
-          }`
-        );
-        const pathLength = path.getTotalLength();
-
-        path.style.strokeDasharray = pathLength.toString();
-        path.style.strokeDashoffset = pathLength.toString();
-      }
-    }
-    // Update the path when the page loads
-    window.addEventListener("DOMContentLoaded", updatePath);
-    // Update the path when the window is resized
-    window.addEventListener("resize", updatePath);
-  </script>
 </Layout>
