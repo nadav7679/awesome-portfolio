@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function Nav() {
   const [toggled, setToggled] = useState(false);
+  const [toggled2, setToggled2] = useState(false);
 
   return (
     <nav className="flex relative mx-8 mb-12 justify-between items-center py-12 pb-6 md:mx-16 lg:mx-32">
@@ -42,7 +43,13 @@ export default function Nav() {
         >
           <div className="flex flex-col gap-12 text-3xl basis-30">
             <a href="/" className="flex"> <FaHome /> &nbsp; Home</a>
-            <a href="/projects" className="flex"> <FaClipboard/> &nbsp; Projects</a>
+            <a href="/projects/feed-forward" className="flex">Feed-Forward</a>
+            <a href="/projects/actin-cortex" className="flex">Actin-Cortex</a>
+            <a href="/projects/WR-Chaos" className="flex">WR-Chaos</a>
+            <a href="/projects/nickel-hydroxide" className="flex">Nickel-Hydroxid</a>
+
+
+            
           </div>
 
           <div
