@@ -5,7 +5,7 @@ export default function Nav() {
   const [toggled, setToggled] = useState(false);
 
   return (
-    <nav className="flex relative mx-8 mb-24 justify-between items-center py-12 pb-6 md:mx-16 lg:mx-32">
+    <nav className="flex relative mx-8 mb-12 justify-between items-center py-12 pb-6 md:mx-16 lg:mx-32">
       {/* GitHub-Linkedin logo-link */}
       <div className="flex justify-start basis-30">
         <a href="https://www.linkedin.com/in/nadav7679/">
