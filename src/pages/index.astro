@@ -7,19 +7,19 @@ import Card from "../components/Card.astro";
 <Layout title="Nadav Port | Home">
   <main>
     <div class="flex flex-col-reverse md:flex-row justify-center items-center">
-      <div class="w-[350px] md:w-[450px]">
+      <div class="w-[450px] md:w-[550px]">
         <h1 class="font-bold text-3xl md:text-5xl tracking-tight mb-1 glitch">
           Nadav Port
         </h1>
-        <h2 class="text-lg mt-2 glitch">
-          Math masters student looking for a new financial journey!
+        <h2 class="text-2xl mt-2 glitch">
+          Maths postgraduate looking for a Quant journay!
         </h2>
-        <p id="anim-p" class="mt-4 text-left">
-          Welcome to my little corner of the web! I am *not* a civil engineer
-          graduated from National Autonomous University of Mexico (UNAM) who
-          decided to break into tech in his late 20s. I am *not* interested in <strong
-            >web developement</strong
-          >, <strong>UI/UX design</strong> and <strong>data analysis.</strong>
+        <p id="anim-p" class="mt-4 text-left text-xl">
+          I am a postgraduate student in Applied Mathematics at Imperial College
+          London, aiming to break into the world of quantitative finance. I am
+          interested in <strong>quantitative research</strong> and
+          <strong>numerical implementation</strong> of mathematical models. Although
+          I created this website, I am not a frontend developer!
         </p>
         <!-- might need work on the size of the god damn picture. All of the w-[something] and md:w-[something] -->
       </div>
@@ -31,20 +31,51 @@ import Card from "../components/Card.astro";
       />
     </div>
 
-    <div class="flex justify-center items-center my-10 md:my-16">
-      <div class="w-[350px] md:w-[740px]">
-        <h2 class="text-3xl font-bold">Projects</h2>
+    <div class="flex justify-center items-center">
+      <div class="w-[450px] md:w-[850px] mt-6">
+        <h2 class="text-3xl font-bold">Current activities</h2>
         <p class="mt-4 text-left">
-          Over my years in acedemia and army service I had completed quite a few
-          projects. The projects regard a viraty of STEM disiplens, including
-          numerical anaylsis of PDE's, mathematical modelling, nonlinear
-          dynamics, DevOps and computer networking, (basic) machine learning,
-          and data science. The details of the projects are in the links below.
+          <ls>
+            <li class="text-lg">
+              Competing in Imperial alphathlon - A <a style="color:green"
+              href="https://www.worldquant.com/brain/"
+              >quantitative competition by Worldquant</a
+              >
+            </li>
+            <li class="text-lg">
+              A software team member of Imperial's Space Society that is
+              manufacturing a rocket engine
+            </li>
+            <li class="text-lg">
+              Full-time <a style="color:green"
+                href="https://www.imperial.ac.uk/study/courses/postgraduate-taught/applied-mathematics/"
+                >postgraduate Applied Mathematics</a
+              > student at Imperial College London.
+            </li>
+          </ls>
         </p>
       </div>
     </div>
+
+    <!-- 
+    <div class="flex flex-col-reverse md:flex-row justify-center items-center mt-4">
+
+        <div class="w-[175px] md:w-[370px]">
+          <h2 class="text-xl">Current activities</h2>
+        </div>
+
+        <div class="w-[175px] md:w-[370px]">
+          <h2 class="text-xl">Experience</h2>
+        </div>
+    </div> -->
+
+    <div class="flex justify-center items-center">
+      <div class="w-[450px] md:w-[850px] mt-6">
+        <h2 class="text-3xl font-bold">Past Projects</h2>
+      </div>
+    </div>
     <div class="flex flex-col-reverse md:flex-row justify-center items-center">
-      <div class="w-[550px] md:w-[950px]">
+      <div class="w-8/12">
         <div
           class="grid grid-cols-2 gap-y-5 md:grid-cols-3 md:gap-y-8 md:gap-x-4 mt-10 ml-14"
         >
@@ -60,8 +91,28 @@ import Card from "../components/Card.astro";
             description="The cortex of the actin"
             link="/actin-cortex"
           />
+          <Card
+            title="Actin Cortex"
+            image="poly_depoly.jpg"
+            description="The cortex of the actin"
+            link="/actin-cortex"
+          />
+          <Card
+            title="Actin Cortex"
+            image="poly_depoly.jpg"
+            description="The cortex of the actin"
+            link="/actin-cortex"
+          />
+          <Card
+            title="Actin Cortex"
+            image="poly_depoly.jpg"
+            description="The cortex of the actin"
+            link="/actin-cortex"
+          />
         </div>
       </div>
     </div>
+
+
   </main>
 </Layout>

@@ -21,9 +21,10 @@ p {
   @apply text-gray-700;
 }
 
-/* a {
-  @apply text-neon-green;
-} */
+a {
+  text-decoration: none;
+  color: #00a00b;
+}
 
 img[alt='cat-in-a-server-room'],
 img[alt='programmer-with-chrome'] {
