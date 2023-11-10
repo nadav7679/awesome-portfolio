@@ -45,7 +45,7 @@ export default function Nav() {
             <a href="/" className="flex"> <FaHome /> &nbsp; Home</a>
             <a href="/projects/feed-forward" className="flex">Feed-Forward</a>
             <a href="/projects/actin-cortex" className="flex">Actin-Cortex</a>
-            <a href="/projects/WR-Chaos" className="flex">WR-Chaos</a>
+            <a href="/projects/wr-chaos" className="flex">WR-Chaos</a>
             <a href="/projects/nickel-hydroxide" className="flex">Nickel-Hydroxid</a>
 
 

@@ -1,7 +1,6 @@
 ---
 import Nav from "../components/Nav";
 import Head from "../components/Head.astro";
-import StringWrapper from "../components/StringWrapper.astro";
 
 export interface Props {
   title: string;
@@ -31,7 +30,7 @@ const {
     <main>
       <Nav client:load />
       <h1
-        class="title text-3xl flex flex-col-reverse md:flex-row justify-center items-center"
+        class="title text-3xl text-center"
       >
         <Fragment set:html={headline} />
       </h1>
