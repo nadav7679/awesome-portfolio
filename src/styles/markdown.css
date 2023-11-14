@@ -10,20 +10,30 @@ body {
 }
 
 h1 {
-  @apply text-1xl font-bold tracking-tight md:text-5xl;
+  @apply text-3xl font-bold tracking-tight md:text-3xl;
+  @apply my-5;
 }
 
 h2 {
-  @apply text-2xl font-bold tracking-tight;
+  @apply text-3xl font-bold tracking-tight md:text-2xl;
+  @apply my-5;
 }
+
 
 p {
-  @apply text-gray-700;
+  @apply text-gray-800;
+  @apply break-all;
+  @apply my-3;
+  @apply mx-2;
+  @apply text-lg
 }
 
-/* a {
-  @apply text-neon-green;
-} */
+img {
+  @apply m-5 flex justify-center items-center;
+  @apply mx-auto;
+
+}
+
 
 img[alt='cat-in-a-server-room'],
 img[alt='programmer-with-chrome'] {
@@ -39,6 +49,10 @@ img[alt='second-option-to-copy-response-gif'] {
   @apply w-8;
 }
 
+.textlink {
+  color: #088d11;
+}
+
 pre {
-  @apply rounded p-4 text-sm;
+  @apply rounded p-4 my-2;
 }

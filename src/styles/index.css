@@ -21,10 +21,6 @@ p {
   @apply text-gray-700;
 }
 
-a {
-  text-decoration: none;
-  color: #00a00b;
-}
 
 img[alt='cat-in-a-server-room'],
 img[alt='programmer-with-chrome'] {
@@ -38,6 +34,10 @@ img[alt='second-option-to-copy-response-gif'] {
 
 [astro-icon] {
   @apply w-8;
+}
+
+.textlink {
+  color: #00a00b;
 }
 
 pre {

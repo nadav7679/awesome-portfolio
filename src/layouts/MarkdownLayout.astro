@@ -1,6 +1,6 @@
 ---
 import Nav from "../components/Nav";
-import Head from "../components/Head.astro";
+import MarkdownHead from "../components/MarkdownHead.astro";
 
 export interface Props {
   title: string;
@@ -18,7 +18,7 @@ const {
 
 <html lang="en">
   <head>
-    <Head title={title} description={description} />
+    <MarkdownHead title={title} description={description} />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
@@ -60,6 +60,11 @@ const {
       body {
         font-family: "Josefin Sans Variable", sans-serif;
       }
+      a {
+        color: #00a00b;
+      }
+
     </style>
   </body>
+  
 </html>
