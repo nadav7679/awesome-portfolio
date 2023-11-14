@@ -5,61 +5,61 @@ import Card from "../components/Card.astro";
 ---
 
 <Layout title="Nadav Port | Home">
-  <main>
-    <div class="flex flex-col-reverse md:flex-row justify-center items-center">
-      <div class="w-[350px] md:w-[550px]">
-        <h1 class="font-bold text-3xl md:text-5xl tracking-tight mb-1 glitch">
-          Nadav Port
-        </h1>
-        <h2 class="text-2xl mt-2 glitch">
-          Maths postgraduate looking for a Quant journay!
-        </h2>
-        <p id="anim-p" class="mt-4 text-left text-xl">
-          I am a postgraduate student in Applied Mathematics at Imperial College
-          London, aiming to break into the world of quantitative finance. I am
-          interested in <strong>quantitative research</strong> and
-          <strong>numerical implementation</strong> of mathematical models. Although
-          I created this website, I am not a frontend developer!
-        </p>
-        <!-- might need work on the size of the god damn picture. All of the w-[something] and md:w-[something] -->
-      </div>
-      <img
-        id="pfp-1"
-        class="mb-10 md:mb-0 h-[200px] w-[150px] md:h-[340px] md:w-[255px] rounded-full ml-0 md:ml-10"
-        src={portrait}
-        alt="Nadav Port"
-      />
-    </div>
+	<main>
+		<div class="flex flex-col-reverse md:flex-row justify-center items-center">
+			<div class="w-[350px] md:w-[550px]">
+				<h1 class="font-bold text-3xl md:text-5xl tracking-tight mb-1 glitch">
+					Nadav Port
+				</h1>
+				<h2 class="text-2xl mt-2 glitch">
+					Maths postgraduate looking for a Quant journay!
+				</h2>
+				<p id="anim-p" class="mt-4 text-left text-xl">
+					I am a postgraduate student in Applied Mathematics at Imperial College
+					London, aiming to break into the world of quantitative finance. I am
+					interested in <strong>quantitative research</strong> and
+					<strong>numerical implementation</strong> of mathematical models. Although
+					I created this website, I am not a frontend developer!
+				</p>
+				<!-- might need work on the size of the god damn picture. All of the w-[something] and md:w-[something] -->
+			</div>
+			<img
+				id="pfp-1"
+				class="mb-10 md:mb-0 h-[200px] w-[150px] md:h-[340px] md:w-[255px] rounded-full ml-0 md:ml-10"
+				src={portrait}
+				alt="Nadav Port"
+			/>
+		</div>
 
-    <div class="flex justify-center items-center">
-      <div class="w-[350px] md:w-[850px] mt-6">
-        <h2 class="text-3xl font-bold">Current activities</h2>
-        <p class="mt-4 text-left">
-          <ls>
-            <li class="text-lg">
-              Competing in Imperial alphathlon - A <a
-                style="color:green"
-                href="https://www.worldquant.com/brain/"
-                >quantitative competition by Worldquant</a
-              > 🧑‍💻
-            </li>
-            <li class="text-lg">
-              A software team member of Imperial's Space Society that is
-              manufacturing a rocket engine 🚀
-            </li>
-            <li class="text-lg">
-              Full-time <a
-                style="color:green"
-                href="https://www.imperial.ac.uk/study/courses/postgraduate-taught/applied-mathematics/"
-                >postgraduate Applied Mathematics</a
-              > student at Imperial College London 🧮
-            </li>
-          </ls>
-        </p>
-      </div>
-    </div>
+		<div class="flex justify-center items-center">
+			<div class="w-[350px] md:w-[850px] mt-6">
+				<h2 class="text-3xl font-bold">Current activities</h2>
+				<p class="mt-4 text-left">
+					<ls>
+						<li class="text-lg">
+							Competing in Imperial alphathlon - A <a
+								style="color:green"
+								href="https://www.worldquant.com/brain/"
+								>quantitative competition by Worldquant</a
+							> 🧑‍💻
+						</li>
+						<li class="text-lg">
+							A software team member of Imperial's Space Society that is
+							manufacturing a rocket engine 🚀
+						</li>
+						<li class="text-lg">
+							Full-time <a
+								style="color:green"
+								href="https://www.imperial.ac.uk/study/courses/postgraduate-taught/applied-mathematics/"
+								>postgraduate Applied Mathematics</a
+							> student at Imperial College London 🧮
+						</li>
+					</ls>
+				</p>
+			</div>
+		</div>
 
-    <!-- 
+		<!-- 
     <div class="flex flex-col-reverse md:flex-row justify-center items-center mt-4">
 
         <div class="w-[175px] md:w-[370px]">
@@ -71,42 +71,59 @@ import Card from "../components/Card.astro";
         </div>
     </div> -->
 
-    <div class="flex justify-center items-center">
-      <div class="w-[350px] md:w-[850px] mt-6">
-        <h2 class="text-3xl font-bold">Past Projects</h2>
-      </div>
-    </div>
-    <div class="flex flex-col-reverse md:flex-row justify-center items-center">
-      <div class="w-full">
-        <div
-          class="grid grid-cols-2 gap-y-5 md:grid-cols-3 md:gap-y-8 md:gap-x-4 mt-10 ml-14"
-        >
-          <Card
-            title="Nickel Hydroxide"
-            image="/projects_media/nickel-hydroxide/nickel.jpg"
-            description="The hydroxide of nickel"
-            link="/projects/nickel-hydroxide"
-          />
-          <Card
-            title="Actin Cortex"
-            image="/projects_media/actin-cortex/poly_depoly.jpg"
-            description="The cortex of the actin"
-            link="/projects/actin-cortex"
-          />
-          <Card
-            title="Deep Learning FF network"
-            image="/projects_media/feed-forward/feed-forward.png"
-            description="feed da network"
-            link="/projects/feed-forward"
-          />
-          <Card
-            title="Analysis of chaos"
-            image="projects_media/wr-chaos/chaos.png"
-            description="Chaos."
-            link="/projects/wr-chaos"
-          />
-        </div>
-      </div>
-    </div>
-  </main>
+		<div class="flex justify-center items-center">
+			<div class="w-[350px] md:w-[850px] mt-6">
+				<h2 class="text-3xl font-bold">Past Projects</h2>
+			</div>
+		</div>
+		<div class="flex flex-col-reverse md:flex-row justify-center items-center">
+			<div class="w-full">
+				<div
+					class="grid grid-cols-2 gap-y-5 md:grid-cols-3 md:gap-y-8 md:gap-x-4 mt-10 ml-14"
+				>
+					<Card
+						title="Mathematical Modeling of Phase Transition in a Battery"
+						image="/projects_media/nickel-hydroxide/nickel.jpg"
+						description="Collaborating with my advisor, we developed a mathematical model capturing the unique phenomenology of phase transition in a nickel-hydroxide electrode within a battery. I conducted in-depth analyses using Matlab and Python."
+						link="/projects/nickel-hydroxide"
+					/>
+
+					<Card
+						title="Numerical Analysis of Biological PDEs"
+						image="/projects_media/actin-cortex/poly_depoly.jpg"
+						description="Conducting both numerical and mathematical analyses, I explored a model depicting a biological process with unconventional boundary conditions. Employing finite difference methods, I crafted a suitable numerical scheme and implemented it using Numpy."
+						link="/projects/actin-cortex"
+					/>
+
+					<Card
+						title="Deep Learning Feed-Forward Network"
+						image="/projects_media/feed-forward/feed-forward.png"
+						description="Implemented a Python and Numpy-based Feed-Forward Deep Learning network, following a mathematical algorithm - backpropagation. I initiated, trained, and analyzed the network's performance, specifically its ability to recognize MNIST digits and recognize a polygon."
+						link="/projects/feed-forward"
+					/>
+
+					<Card
+						title="Analysis of Chaos in Chemical Reactions"
+						image="/projects_media/wr-chaos/chaos.png"
+						description="For the final project in a Nonlinear-Dynamics module, I analyzed a chaotic system of equations based on the Willamoski-Rossler equations. Exploring numerous parameters, I selected a few and detailed their influence on the system."
+						link="/projects/wr-chaos"
+					/>
+
+					<Card
+						title="Setting Up Real-Time Data Science Workflow Tool"
+						image="/projects_media/argo/argo.jpg"
+						description="During my army service, I focused on real-time, continuous data processing. In this project, I configured and tested the 'Argo-Workflows' workflow/pipeline programming tool on our Kubernetes cluster. I found the software valuable and documented its basic usage."
+						link="/projects/argo"
+					/>
+
+					<Card
+						title="Generic Computer Networking Security Layer in Openshift"
+						image="/projects_media/security_layer/security_layer.jpg"
+						description="Developed a generic networking security layer utilizing NGINX and the OIDC protocol for applications running on Openshift. The objective was to provide OIDC protection without developers needing to implement it directly into their code."
+						link="/projects/security_level"
+					/>
+				</div>
+			</div>
+		</div>
+	</main>
 </Layout>
