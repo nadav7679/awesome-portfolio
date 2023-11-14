@@ -59,35 +59,16 @@ import Card from "../components/Card.astro";
 			</div>
 		</div>
 
-		<!-- 
-    <div class="flex flex-col-reverse md:flex-row justify-center items-center mt-4">
-
-        <div class="w-[175px] md:w-[370px]">
-          <h2 class="text-xl">Current activities</h2>
-        </div>
-
-        <div class="w-[175px] md:w-[370px]">
-          <h2 class="text-xl">Experience</h2>
-        </div>
-    </div> -->
-
 		<div class="flex justify-center items-center">
 			<div class="w-[350px] md:w-[850px] mt-6">
 				<h2 class="text-3xl font-bold">Past Projects</h2>
 			</div>
 		</div>
 		<div class="flex flex-col-reverse md:flex-row justify-center items-center">
-			<div class="w-full">
+			<div class="w-10/12">
 				<div
-					class="grid grid-cols-2 gap-y-5 md:grid-cols-3 md:gap-y-8 md:gap-x-4 mt-10 ml-14"
+					class="grid grid-cols-1 gap-y-5 md:grid-cols-3 md:gap-y-8 md:gap-x-4 mt-10 ml-14"
 				>
-					<Card
-						title="Mathematical Modeling of Phase Transition in a Battery"
-						image="/projects_media/nickel-hydroxide/nickel.jpg"
-						description="Collaborating with my advisor, we developed a mathematical model capturing the unique phenomenology of phase transition in a nickel-hydroxide electrode within a battery. I conducted in-depth analyses using Matlab and Python."
-						link="/projects/nickel-hydroxide"
-					/>
-
 					<Card
 						title="Numerical Analysis of Biological PDEs"
 						image="/projects_media/actin-cortex/poly_depoly.jpg"
@@ -95,6 +76,12 @@ import Card from "../components/Card.astro";
 						link="/projects/actin-cortex"
 					/>
 
+					<Card
+						title="Mathematical Modeling of Phase Transition in a Battery"
+						image="/projects_media/nickel-hydroxide/nickel.jpg"
+						description="Collaborating with my advisor, we developed a mathematical model capturing the unique phenomenology of phase transition in a nickel-hydroxide electrode within a battery. I conducted in-depth analyses using Matlab and Python."
+						link="/projects/nickel-hydroxide"
+					/>
 					<Card
 						title="Deep Learning Feed-Forward Network"
 						image="/projects_media/feed-forward/feed-forward.png"
@@ -108,7 +95,6 @@ import Card from "../components/Card.astro";
 						description="For the final project in a Nonlinear-Dynamics module, I analyzed a chaotic system of equations based on the Willamoski-Rossler equations. Exploring numerous parameters, I selected a few and detailed their influence on the system."
 						link="/projects/wr-chaos"
 					/>
-
 					<Card
 						title="Setting Up Real-Time Data Science Workflow Tool"
 						image="/projects_media/argo/argo.jpg"
