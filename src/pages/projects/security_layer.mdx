@@ -1,0 +1,19 @@
+import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
+
+
+<MarkdownLayout headline="OIDC <strong>&nbspprotection&nbsp</strong> without OIDC code.">
+    My first major project during my service involved finding a way to implement OIDC (OpenID Connect) authentication and authorization on our Openshift websites without burdening developers with direct code integration.
+
+    This mission demanded days and nights of effort, involving a steep learning curve in devops, Openshift-Kubernetes, Linux, networks and NGINX, Docker, Keycloak, and security protocols. The project touched on various areas, turning it into a colossal task. Gradually, step by step, I overcame challenges to achieve the ambitious goal of creating a generic security layer.
+
+    The "security layer" essentially acts as a proxy to OIDC authentication provided by Keycloak, utilizing an external IDP (Identity Provider). This approach allows the effortless creation of a simple and website using Python or Node.js, without requiring in-depth knowledge of security protocols. Developers can then establish a blacklist/whitelist of authorized users, identified through the external IDP. Users are automatically authenticated without the need for manual registration.
+
+    I documented this journey comprehensively, summarizing all acquired knowledge and progress in a sizable (and bit theatrical) documentation file.
+
+    <br></br>
+    __Note__: While this method was once implemented, it is now deprecated and unclassified, allowing me to freely share it.
+
+    <br></br>
+    <a href="/projects_media/security_layer/security_layer.pdf" class="text-center text-3xl flex items-center justify-center">Click here to view the guide!</a>
+</MarkdownLayout>
+
