@@ -42,11 +42,13 @@ export default function Nav() {
             w-full flex-col items-center justify-center gap-24 backdrop-blur-xl text-2xl font-bold"
         >
           <div className="flex flex-col gap-12 text-3xl basis-30">
-            <a href="/" className="flex"> <FaHome /> &nbsp; Home</a>
-            <a href="/projects/feed-forward" className="flex">Feed-Forward</a>
-            <a href="/projects/actin-cortex" className="flex">Actin-Cortex</a>
-            <a href="/projects/wr-chaos" className="flex">WR-Chaos</a>
-            <a href="/projects/nickel-hydroxide" className="flex">Nickel-Hydroxid</a>
+            <a href="/" className="flex"> <FaHome /> &nbsp; About</a>
+            <a href="/projects/actin-cortex" className="flex">Numerical Analysis of Biological PDEs</a>
+            <a href="/projects/nickel-hydroxide" className="flex">Mathematical Modeling of Battery Phase Transition</a>
+            <a href="/projects/feed-forward" className="flex">Deep Learning Feed-Forward Network</a>
+            <a href="/projects/wr-chaos" className="flex">Analysis of Chaos in Chemical Reactions</a>
+            <a href="/projects/argo" className="flex">Real-Time Data Science Workflow Tool</a>
+            <a href="/projects/security_layer" className="flex">Computer Networking Security Layer in Openshift</a>
 
 
             
