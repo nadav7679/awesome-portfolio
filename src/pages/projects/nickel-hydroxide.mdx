@@ -1,31 +1,169 @@
 import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
 
 
-<MarkdownLayout headline="Mathematical modeling and numerical simulation of <strong>&nbspnickel-hydroxide&nbsp</strong>battery.">
-In my work, I present a mean-field model of the nickel-hydroxide (Ni(OH)2) electrode in the Edison rechargeable battery. The model aims to describe the electrode's dynamics, charge transport, and phase separation. The Poisson-Nernst-Planck equation is used to describe the charge transport, while the Cahn-Hilliard approach is used to model the phase separation. The model equations are solved numerically using MATLAB's pdepe package.
+<MarkdownLayout headline="Capturing nickel-hydroxide battery <strong>&nbspusing mathematics&nbsp</strong>.">
+In one of my two undergrad senior year reseach projects, I present a mean-field model of the nickel-hydroxide (Ni(OH)2) electrode in the Edison rechargeable battery. The model aims to describe the electrode's dynamics, charge transport, and phase separation. The Poisson-Nernst-Planck equation is used to describe the charge transport, while the Cahn-Hilliard approach is used to model the phase separation. Then, the model equations are solved numerically. Before I'll present the project, let's see an importent permilmeniry work I did.
 
-The numerical solution is done in 1D, and the model equations take the following form:
+# Numerically solving the PNP equations
+While my advisor and I were working on the mathematical model, I also tried to tackle my first numerical problem - solving the Poission Nernst Planck equations. I provided quite a detailed solution, which I will present here.
 
+
+We would like to solve the following equations (in 1D):
+$$
+\begin{align}
+    \frac{\partial p}{\partial t} &= \nabla^2 p + \nabla(p\nabla \phi) \\
+    \frac{\partial n}{\partial t} &= \nabla^2 n - \nabla(n\nabla \phi) \\
+    \nabla^2 \phi &= n - p
+\end{align}
+$$
+Subject to the boundary conditions:
+$$
+\begin{align}
+    \nabla p + p \nabla \phi &= \nabla n - n \nabla \phi = 0, \, x=L,0 \\
+    \phi(L_x) &= 1, \phi(0) = -1
+\end{align}
+$$
+To find $\phi$ for all $x$ at the current step, I will use the implicit finite difference method.
+After applying finite difference, the potential $\phi(x,t)$ at the point $x_m, 0<m<M-1$ would be:
 $$
 \begin{equation}
-0 = -n + \frac{\partial}{\partial x}(\epsilon\frac{\partial \phi}{\partial x})
+    \frac{\Delta x^2}{2}(p_m - n_m) = \phi_m -\frac{1}{2} \phi_{m+1} -\frac{1}{2} \phi_{m-1}
 \end{equation}
 $$
+Therefore, solving for $\phi$ at a certain time would mean solving the following matrix:
 $$
 \begin{equation}
-\frac{\partial n}{\partial t} = D_n\frac{\partial}{\partial x}(\frac{\partial n}{\partial x} - n\frac{\partial \phi}{\partial x}) - \frac{\alpha}{2}(1-u)n - (1+u)(1-n)
+       \begin{bmatrix}
+          1 & -\frac{1}{2} & 0 & 0 & ... \\
+          -\frac{1}{2} & 1 & -\frac{1}{2} & 0 & ... \\
+          ... & ... \\
+          ... & 0 & -\frac{1}{2} & 1 & -\frac{1}{2} \\
+          ... & 0 & 0 & -\frac{1}{2} & 1
+       \end{bmatrix}
+       \begin{bmatrix}
+          \phi_1 \\
+          \phi_2 \\
+          ... \\
+          \phi_{M-3} \\
+          \phi_{M-2}
+       \end{bmatrix}    
+         =
+         \frac{\Delta x^2}{2}
+          \begin{bmatrix}
+           p_1 - n_1 + \frac{1}{\Delta x^2} \phi_0 \\
+           p_2 - n_2 \\
+           ... \\
+           p_{M-3} - n_{M-3} \\
+           p_{M-2} - n_{M-2} + \frac{1}{\Delta x^2} \phi_M
+        
+           \end{bmatrix}
 \end{equation}
 $$
+Notice that the LHS matrix is composed of $(M-2)$ ones, and $(M-3)$ elements $-\frac{1}{2}$ on each diagonal.  
+
+In python, it looks like this:
+```python
+def get_phi(phi_0, phi_M, n, p, dx, n_l=0, n_r=0):
+    # TODO: add phi_neumann conditions
+
+    # Creating the coeff matrix
+    coeff_matrix = np.diag(np.ones(M-2)) + np.diag(-0.5*np.ones(M-3), 1) + np.diag(-0.5*np.ones(M-3), -1)
+
+    # Creating the RHS result vector
+    result_vector = np.array([p[m]-n[m] for m in range(2, M-2)])
+    right_res = p[M-2] - n[M-2] + phi_M/(dx**2)
+    left_res = p[1] - n[1] + phi_0/(dx**2)
+    result_vector = ((dx**2)/2)*np.append(np.insert(result_vector, 0, left_res), right_res)
+
+    # Solving for phi and adding the boundry
+    phi_trimmed = np.linalg.solve(coeff_matrix, result_vector)
+    phi = np.append(np.insert(phi_trimmed, 0, phi_0), phi_M)
+
+    return phi
+```
+
+Together with finding $\phi$, we need to iterate $p(x,t), n(x,t)$. It means finding $p_m^{i+1}, n_m^{i+1}$. We assume that we have $p_m^j, n_m^j$ for every $m, j<i$.
+I will use explicit central difference method to get:
 $$
-\begin{equation}
-\frac{\partial u}{\partial t} = D_u\frac{\partial}{\partial x}(1-u^2\frac{\partial u}{\partial x})
-\end{equation}
+\begin{align}
+    \begin{split}
+        p_m^{i+1} = {}& p_m^{i} + \frac{\Delta t}{\Delta x^2} [ p_{m+1}^i + p_{m-1}^i - 2p_m^i + \frac{1}{4}(p_{m+1}^i-p_{m-1}^i)(\phi_{m+1}^i-\phi_{m-1}^i) \\
+        & + p_m^i(\phi_{m+1}^i+\phi_{m-1}^i-2\phi_m^i) ]
+    \end{split} \\
+    \begin{split}
+        n_m^{i+1} = {}& n_m^{i} + \frac{ \Delta t}{\Delta x^2} [ n_{m+1}^i + n_{m-1}^i - 2n_m^i - \frac{1}{4}(n_{m+1}^i-n_{m-1}^i)(\phi_{m+1}^i-\phi_{m-1}^i) \\
+        & - n_m^i(\phi_{m+1}^i+\phi_{m-1}^i-2\phi_m^i) ]
+    \end{split}
+\end {align}
+$$
+This can be implemented nicely using NumPy:
+```python
+def iterate_concentration(c, phi, dx, dt, positive, flux_l=0, flux_r=0, neumann=False):
+    """
+    Assume c and phi are 1XM vectors 
+    c_pp - c-prime-prime, cp - c-prime, phi_pp - phi-prime-prime, phi_p - phi-prime
+    
+    """
+    sign = 1 if positive else -1
+
+    c_1, c_M = c[0], c[M-1]
+    phi_1, phi_M = phi[0], phi[M-1]
+    # c_prev_1, c_prev_M = c_prev[0], c_prev[M-1]
+
+
+    c_rolled = np.roll(c, 1)
+    c_rolled_back = np.roll(c, -1)
+    np.put(c_rolled, [0, -1], [c_1, c_M]) # Creating c_{m+1}
+    np.put(c_rolled_back, [0, -1], [c_1, c_M]) # Creating c_{m-1}
+
+    phi_rolled = np.roll(phi, 1)
+    phi_rolled_back = np.roll(phi, -1)
+    np.put(phi_rolled, [0, -1], [phi_1, phi_M]) # Creating phi_{m+1}
+    np.put(phi_rolled_back, [0, -1], [phi_1, phi_M]) # Creating phi_{m+1}
+
+    c_pp = c_rolled + c_rolled_back - 2*c
+    c_p = c_rolled - c_rolled_back
+    
+    phi_pp = phi_rolled + phi_rolled_back - 2*phi
+    phi_p = phi_rolled - phi_rolled_back
+    # print(phi_p, phi_pp)
+
+    c_iter = c + dt/(dx**2)*(c_pp + (1/4)*sign*c_p*phi_p + sign*c*phi_pp)
+    
+    if neumann:
+        c_iter[0] = (dx*flux_l - c_iter[1])/(sign*(phi[1]-phi[0])-1)
+        c_iter[-1] = c_iter[-2] - sign*c_iter[-2]*(phi[-1]-phi[-2]) + dx*flux_r
+
+
+    return c_iter
+```
+This eventually, results in this beautiful animation
+<img  src="/projects_media/nickel-hydroxide/pnp.gif"/>
+
+# The actual nickel-hydroxide project
+
+We started from a different set of mathematical equations, but quickly realized that we have to modify the mathematical model to our specific setup. Eventually, the model equations took the following form:
+
+$$
+\begin{align}
+    0 ={}& -n + \partial_x (\epsilon \partial_x \phi)\\
+    \frac{\partial n}{\partial t} ={}& D_n \partial_x \cdot (\partial_x n - n \partial_x \phi) - \frac{\alpha}{2} \big( (1-u)n - (1+u)(1-n) \big)\\
+    \frac{\partial u}{\partial t} ={}& D_u \partial_x \cdot (1-u^2) \left[ \frac{1}{1-u^2} \partial_x u + \beta W''(u) \partial_x u + \lambda \partial_x \psi \right] \\
+    & + \frac{\alpha}{2} \big( (1-u)n - (1+u)(1-n) \big) \\
+    \psi ={}& \partial_x ^2 u
+\end{align}
 $$
 
-To implement the Cahn-Hilliard fourth-order derivative, a variable $\psi$ is introduced, which is the second derivative of $u$. The numerical model is solved using MATLAB's pdepe package, which does not allow explicit 3rd or higher order derivatives.
+Essentialy, the equations describe the motion of the ions inside the solution, affected by diffusion, electric forces, and concentration gradients. 
+A full description of the model, its parameters, and the code, can be found <a class="textlink" href="https://github.com/nadav7679/phase_field_Ni_batteries/blob/main/Mean_field_of_nickel_hydroxide_electrode_in_Edison_rechargeable_battery_final.pdf">in my GitHub</a>.  
 
-During this project, I made many changes to the model. The positive charge-carrier was omitted from the model, as it was found to be negligible. I needed to study electrochemistry, Chan-Hilliard's approach to phase separation, and different numerical methods for PDEs. This project expanded my knowledge and provided a taste of research. The results of the model successfully describe the very basic form of the material's phase change and provide a starting point for a more detailed and exact model of the electrode and battery. I would like to thank Professor Arik Yochelis for his much-appreciated help and guidance during my work on this project.
+An essential part of the dynamcis is the phase-transition the material goes through (this was modeled with Cahn-Hilliard equations). We can see this dynamics in action in the following figure:
+<img class="w-10/12" src="/projects_media/nickel-hydroxide/nickel.jpg"/>
 
-In conclusion, my work presents a mean-field model of the Ni(OH)2 electrode in the Edison rechargeable battery. The model equations are solved numerically using MATLAB's pdepe package. The model describes the electrode's dynamics, charge transport, and phase separation. The presented model went through many changes during this project. The positive charge-carrier was omitted from the model, as it was found to be negligible. The numerical model is solved using MATLAB's pdepe package, which does not allow explicit 3rd or higher order derivatives. The results of the model successfully describe the very basic form of the material's phase change and provide a starting point for a more detailed and exact model of the electrode and battery. This work provides a valuable contribution to the field of rechargeable batteries and can be used as a foundation for further research.
+The figure was created in MatLab and it shows a Space-time plot with an input electron flux (to the electrode) from the right. The different phases are Purple - ${Ni(OH)_2}$, Blue - ${NiOOH}$. Over time, the ${Ni(OH)_2}$ phase takes over the material and the interface moves to the left edge.
+
+After I had to submit the project and continue with my studies, my advisor informed me that he and his fellows developed upon my work a 2D model, that gave them the exact behaviour they looked for (which I will not detail here). Hopefully I will be able to help their efforts and advance their research, so we could publish permilmeniry results in the upcoming couple of yars.
+
+
 </MarkdownLayout>
 
