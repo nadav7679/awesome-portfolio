@@ -43,19 +43,19 @@ export default function Nav() {
         >
           <div className="flex flex-col gap-12 text-3xl basis-30">
             <a href="/" className="flex"> <FaHome /> &nbsp; About</a>
-            <a href="/projects/actin-cortex" className="flex">Numerical Analysis of Biological PDEs</a>
-            <a href="/projects/nickel-hydroxide" className="flex">Mathematical Modeling of Battery Phase Transition</a>
-            <a href="/projects/feed-forward" className="flex">Deep Learning Feed-Forward Network</a>
-            <a href="/projects/wr-chaos" className="flex">Analysis of Chaos in Chemical Reactions</a>
-            <a href="/projects/argo" className="flex">Real-Time Data Science Workflow Tool</a>
-            <a href="/projects/security_layer" className="flex">Computer Networking Security Layer in Openshift</a>
+            <a href="/projects/actin-cortex" className="flex">Actin-Cortex</a>
+            <a href="/projects/nickel-hydroxide" className="flex">Battery Phase Transition</a>
+            <a href="/projects/feed-forward" className="flex">Feed-Forward Network</a>
+            <a href="/projects/wr-chaos" className="flex">Chemical Reactions Chaos</a>
+            <a href="/projects/argo" className="flex">Data Workflows</a>
+            <a href="/projects/security_layer" className="flex">OICD Security</a>
 
 
             
           </div>
 
           <div
-            className="cursor-pointer"
+            className="cursor-pointer text-3xl"
             onClick={() => setToggled((prevToggled) => !prevToggled)}
           >
             <FaTimes />
