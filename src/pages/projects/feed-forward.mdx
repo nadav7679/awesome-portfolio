@@ -1,26 +1,25 @@
 import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
 
 
-<MarkdownLayout headline="The most basic Deep Neural Network, <strong>&nbspfrom scratch&nbsp</strong>.">
+<MarkdownLayout headline="A simple Deep Neural Network,<strong>&nbspfrom scratch</strong>.">
 This project was an assignment in a neural-computation course called Introduction to Neural Networks. We studied computational models of the brain and followed their mathematical models. Instances of the network had their weights and biases trained to solve various problems, such as recognizing MNIST digits.
 
-[Click here for the full report](https://github.com/nadav7679/introduction_to_neural_networks/blob/d2034fd792ff6b44cf11315f247ed23a693247fe/AS04%20-%20Feed-Forward%20Networks/FeedForward%20Network%20-%20Nadav%20Porat.pdf) and [here for the Python code](https://github.com/nadav7679/introduction_to_neural_networks/blob/d2034fd792ff6b44cf11315f247ed23a693247fe/AS04%20-%20Feed-Forward%20Networks/FF%20Network.py).
 
 I thoroughly enjoyed programming a dynamic Feed-Forward network in NumPy! Seeing the algorithm at work was a blast! We can observe the algorithm's results in the following picture. It was trained to recognize MNIST digits, and the histogram shows that most incidents had a near-zero error!
 
+
 <img class="w-6/12" src="/projects_media/feed-forward/feed-forward.png"/>
 
+
+# Algorithm Walkthrough
 The code followed the mathematical backpropagation algorithm (based on gradient descent) in J. Hertz's Introduction to Neural Computation book:
 
 <img class="w-6/12" src="/projects_media/feed-forward/book.png"/>
 
-# Code and Algorithm Explanation
 
-The full code can be found [here on Github](https://github.com/nadav7679/introduction_to_neural_networks/blob/d2034fd792ff6b44cf11315f247ed23a693247fe/AS04%20-%20Feed-Forward%20Networks/FF%20Network.py).
+A sketch of the algorithm and snippets of the code are given below. For more details, <a class="textlink" href="https://github.com/nadav7679/introduction_to_neural_networks/blob/d2034fd792ff6b44cf11315f247ed23a693247fe/AS04%20-%20Feed-Forward%20Networks/FeedForward%20Network%20-%20Nadav%20Porat.pdf">click here for the full report</a> and <a class="textlink" href="https://github.com/nadav7679/introduction_to_neural_networks/blob/d2034fd792ff6b44cf11315f247ed23a693247fe/AS04%20-%20Feed-Forward%20Networks/FF%20Network.py"> here for the Python code.</a>.
 
-The algorithm and the code are explained as follows:
-
-# Feedforward Computation
+## Feedforward Computation
 
 The feedforward process involves passing the input through the network to produce an output. In each layer, the input is multiplied by the weights, and the result is passed through the activation function. The output of one layer becomes the input for the next layer.
 
@@ -52,7 +51,7 @@ The feedforward function in the code performs this operation layer by layer:
        ```
    - The final activation \(a\) is returned.
 
-# Backpropagation
+## Backpropagation
 
 Backpropagation is the process of updating the weights of the neural network to minimize the error between the predicted and actual outputs. The algorithm works backward from the output layer to the input layer, adjusting weights based on the computed error gradients.
 
