@@ -2,14 +2,36 @@ import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
 
 
 <MarkdownLayout headline="Analysis of<strong>&nbspchaos&nbsp</strong>in Willamowski-Rossler reaction.">
-In this project, I explored the chaotic behavior of the Willamowski-Rossler system, which models a series of autocatalytic chemical reactions. Using numerical analysis, I investigated the synchronization between two identical systems and the dependence of the final values on the initial conditions. 
+In this project, which was done at the end of a Dynamical Systems course, I explored the chaotic behavior of the Willamowski-Rossler system, which models a series of autocatalytic chemical reactions. I didn't delve into the chemistry; the important part for me was that the equations produced _chaotic_ behavior. I analyzed the chaotic system and discussed some parameters that affect it. The <a class="textlink" href="https://github.com/nadav7679/dynamical_systems/blob/master/Final_Project/Chemical_reactions_FIN_18_02.pdf">full project can be found here</a>.
+<br></br>
 
-To study synchronization, I followed the mathematical method of chaos synchronization proposed by Hu and Xu. This method involves coupling two identical chaotic systems and adjusting the coupling strength until they synchronize. I found that the Willamowski-Rossler system exhibits fast synchronization, meaning that the two systems synchronize quickly and maintain synchronization even when the coupling strength is weak. 
+The WR equations:
+$$
+\begin{align}
+    \dot{x} &= k_1a_1x - k_{-1}x^2 -k_2xy +k_{-2}y^2 - k_4xz \\
+    \dot{y} &= k_2xy - k_{-2}y^2 -k_3a_5y+k_{-3}a_2 \\
+    \dot{z} &= k_5a_4z-k_{-5}z^2-k_4xz+k_{-4}a_3 
+\end{align}
+$$
 
-Next, I examined the dependence of the final values on the initial conditions. Specifically, I looked at the relationship between the final value of one variable, $z_1$, and the initial value of another variable, $x_{01}$. I found that for small coupling strengths, there is a linear relationship between $z_1$ and $x_{01}$, which can be explained by fast synchronization. However, even for large coupling strengths, the linear relationship persists, which suggests that there is another mechanism at play. 
+These equations were found to have an attracting loop:
 
-In addition to these numerical investigations, I also delved into the mathematical theory behind chaos and strange attractors. I explored the Lyapunov exponent, which measures the rate of divergence of nearby trajectories in phase space. For chaotic systems, the Lyapunov exponent is positive, indicating that nearby trajectories diverge exponentially. I also studied the strange attractor of the Willamowski-Rossler system, which is a fractal object that describes the long-term behavior of the system. 
+<img src="/projects_media/wr-chaos/loop.gif"/>
 
-Overall, this project provided a fascinating glimpse into the chaotic behavior of the Willamowski-Rossler system. Through numerical analysis and mathematical theory, I gained a deeper understanding of the synchronization between chaotic systems and the dependence of final values on initial conditions.
+Also, under different parameters, they give rise to this beautiful _strange attractor_:
+
+<img src="/projects_media/wr-chaos/chaos.png"/>
+
+I used Python and the software XPPAUT to investigate the synchronization between two identical WR systems and the dependence of the final values on the initial conditions.
+
+I found that the Willamowski-Rossler system exhibits fast synchronization, meaning that the two systems synchronize quickly and maintain synchronization even when the coupling strength is weak.
+
+<br></br>
+Next, I examined the dependence of the final values on specific parameters. I focused on $k_{-2}$. It describes the rate of the reverse reaction and is the coefficient of the nonlinear term $y^2$ in the chaotic equations. Without it, we are diminishing the reverse reaction and therefore changing the whole system.
+I found that it has a bifurcation:
+
+<img src="/projects_media/wr-chaos/x1_k2_bifn.png"/>
+
+Overall, this project provided an amazing glimpse into the chaotic behavior of the Willamowski-Rossler system and chaos theory. It was also the first academic project that I did; I enjoyed researching and writing in LaTeX for the first time. As a result of this project, I worked with my advisor on two additional projects.
 </MarkdownLayout>
 
