@@ -1,29 +1,168 @@
 import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
 
 
-<MarkdownLayout headline="Mathematical modeling and numerical simulation of&nbsp<span class='font-bold'>actin cortex</span>&nbspgrow.">
-During my senior year in physics, I worked on a project that aimed to model the dynamics of actin cortex polymerization and depolymerization. The actin cortex is a thin layer of actin filaments that lies beneath the plasma membrane of eukaryotic cells. It plays a crucial role in cell mechanics, cell division, and cell motility. In this project, I developed a mean field model that describes the spatiotemporal evolution of the actin cortex. The model consists of a set of partial differential equations that capture the dynamics of actin monomers, filaments, and associated proteins.
+<MarkdownLayout headline="Numerical simulation of<strong>&nbspactin cortex&nbsp</strong>growth.">
 
-The model equations are based on mass action kinetics and incorporate various biological parameters such as the rate of nucleation, elongation, and capping of actin filaments. The equations are given by:
+During my senior year in physics, I worked on a project that aimed to model the dynamics of a certain part of the cell called the actin cortex. The actin cortex is a thin layer of actin filaments that lies beneath the plasma membrane of eukaryotic cells. It plays a crucial role in cell mechanics, cell division, and cell motility. I proofchecked a model supervised by my advisor and their colleagues, mainly using numerical methods (and ensuring mathematical consistency).
+Finally, I implemented it all in Python to obtain solutions like this:
+<br></br>
+<img  src="/projects_media/actin-cortex/poly_depoly2.gif"/>
+
+# Discretization
+The model consists of a set of partial differential equations that capture the dynamics of actin monomers, filaments, and associated proteins. The complex dynamics of all these eventually create an actin cortex and maintain it in an equilibrium state.
+I will focus only on the discretization here, but the <a class="textlink" href="https://github.com/nadav7679/actin-cortex/blob/89a7ec2ecf92d33861cad51b90e98510b6474f7e/Actin_cortex_formation__Nadav_final.pdf">full model can be seen here</a>.
+<br></br>
+To solve the model equations numerically, I used a finite difference method that discretizes the spatial domain into a grid of points and approximates the derivatives using central differences. Then, I incorporated the boundary conditions - which were quite complex.
+
+The discretized equations:
+
+$$
+
+\begin{align}
+    p_i^{n+1} &= p_i - \frac{\Delta t}{\Delta x} \cdot v (p_{i} - p_{i-1}) - Depoly \\
+    m_i^{n+1} &= m_i + D_m \frac{\Delta t}{2 \Delta x^2} \big[(2 - \beta (p_i + p_{i+1}))(m_{i+1}-m_i) \nonumber \\ &\quad - (2 - \beta (p_i + p_{i-1}))(m_{i}-m_{i-1}) \big] + Depoly \\
+    c_{f,i}^{n+1} &= c_{f, i} + D_c \frac{\Delta  t}{\Delta x^2} (c_{f, i+1} + c_{f, i-1} - 2 c_{f, i}) - Bind + Depoly \\
+    c_{b,i}^{n+1} &= c_{b, i} - v \frac{\Delta  t}{\Delta x} (c_{b, i} - c_{b, i-1}) + Bind - Depoly
+\end{align}
+$$
+Where:
+$$
+\begin{align}
+    Depoly &= \Delta t \, \alpha c_{b, i} p_i \\
+    Bind &= \Delta t \, k_s c_{f, i} p_i 
+\end{align}
+$$
+
+
+Most of the boundary conditions were quite normal, except for one. The boundary condition for $m$ accounts for a significant part of the dynamics, namely, the polymerization (synthesis of $p$) on the edge. It required special treatment and turned out to be:
 $$
 \begin{equation}
-\frac{\partial m}{\partial t} = D_m \nabla^2 m - k_n m + k_p f m - k_c m f
+    m_0^{n+1} = m_0 + D_m \frac{\Delta t}{2 \Delta x^2} \big[(2 - \beta (p_0 + p_{1}))(m_{1}-m_0) - (2 - \beta (p_0 + p_{-1}))(m_{0}-m_{-1}) \big] 
 \end{equation}
 $$
-$$
-\begin{equation}
-\frac{\partial f}{\partial t} = D_f \nabla^2 f + k_n m - k_p f m - k_c m f
-\end{equation}
-$$
-$$
-\begin{equation}
-\frac{\partial p}{\partial t} = D_p \nabla^2 p + k_{cp} f - k_{dp} p
-\end{equation}
-$$
-where $m$, $f$, and $p$ are the concentrations of actin monomers, filaments, and associated proteins, respectively. $D_m$, $D_f$, and $D_p$ are the diffusion coefficients, and $k_n$, $k_p$, $k_c$, $k_{cp}$, and $k_{dp}$ are the reaction rate constants.
+With $p_{-1}=p_{0}$.
 
-To solve the model equations numerically, I used a finite difference method that discretizes the spatial domain into a grid of points and approximates the derivatives using central differences. The resulting system of ordinary differential equations was then solved using the fourth-order Runge-Kutta method, which is a widely used numerical method for solving differential equations. 
+# Implementation
+Here I will present code snippets of the Python Implementation. The  <a class="textlink" href="https://github.com/nadav7679/actin-cortex/blob/main/finite_difference/actin_cortex.py">full code can be found here</a>.
 
-The numerical results show that the model captures the essential features of actin cortex dynamics, such as the formation of traveling waves and the emergence of spatial patterns. The model also predicts the existence of stable and
+First, the calculation of $f$, which includes all the $non-flux$ $terms$ in equations (1-4):
+
+```python
+def get_f(self):
+    """Calculates the f part of the discretizied equations
+
+    Returns:
+        tuple: f_p[-1:1], f_m[-1:1], f_cf[-1:1], f_cb[-1:1]
+    """
+    dt, dx, p, cf, cb, v = (
+        self._dt,
+        self._dx,
+        self._p,
+        self._cf,
+        self._cb,
+        self._v,
+    )
+    k_s = self._params["k_s"]
+    alpha = self._alpha if isinstance(self._alpha, (int, float)) else self._alpha
+
+    depoly = (dt * alpha) * cb * p
+    bind = (dt * k_s) * cf * p
+
+    p_prev = np.roll(p, 1)
+    cb_prev = np.roll(cb, 1)
+
+    f_p = -v * dt / (dx) * (p - p_prev) - depoly  
+    f_m = depoly                                  
+    f_cf = depoly - bind                          
+    f_cb = -v * dt / (dx) * (cb - cb_prev) - f_cf
+
+    return f_p, f_m, f_cf, f_cb
+```
+
+Now that we have a function calculating the non-flux terms, we can continue to the full iteration and solving of the system.
+Notice, for example, that under the comment "Calculate inner-points" below, we can actually see equation (2) explicitly:
+
+```python
+def iterate_values(self):
+    ...
+
+    self._v = a_br * k_br * (m[0] ** 2) + a_gr * k_gr * (m[0] - m_c)
+    v = self._v
+    f = self.get_f()
+
+    # Calculate boundaries
+    p_L, m_L, cf_L, cb_L = 0, m[-3], cf[-3], 0
+    p_0, cf_0, cb_0 = p[1], cf[2], 0
+    m_minus_1 = m[1] - 2*dx/(Dm*(1-beta*p[0])) * p[0] * v
+    m_0 = m[0] + Dm*dt/(2*dx**2) * \
+                ((2-beta*(p[0] + p[1]))*(m[1] - m[0]) - (2-2*beta*p[0])*(m[0] - m_minus_1))
+
+    # Calculate inner-points
+    m_flux = Dm * dt / (2 * dx**2) * \
+        (
+            (2 - beta * (p[1:-1] + p[2:])) * (m[2:] - m[1:-1])
+            - (2 - beta * (p[1:-1] + p[:-2])) * (m[1:-1] - m[:-2])
+        )
+    
+    cf_flux = Dc * dt / (dx**2) * (cf[2:] + cf[:-2] - 2 * cf[1:-1])
+
+    # Set boundaries
+    p[-1], m[-1], cf[-1], cb[-1] = p_L, m_L, cf_L, cb_L
+    p[0], m[0], cf[0], cb[0] = p_0, m_0, cf_0, cb_0
+
+    # Assign new values
+    p[1:-1] = p[1:-1] + f[0][1:-1]
+    m[1:-1] = m[1:-1] + m_flux + f[1][1:-1]
+    cf[1:-1] = cf[1:-1] + cf_flux + f[2][1:-1]
+    cb[1:-1] = cb[1:-1] + f[3][1:-1]
+
+    return p, m, cf, cb, v
+
+```
+The two functions above actually do the needed calculations. Now all that's left is wrapping them in a solver!
+
+```python
+def solver(self, live_plot=True):
+    ...
+    for n in t:
+        err1, err2 = self.mass_sum()
+
+        if self.user_action:
+            self.user_action(
+                p=p, m=m, cf=cf, cb=cb, v=v, dx=dx, dt=dt, x=x, t=t, n=n
+            )
+
+        if (
+            self.validation
+        ):  # Raise an error when either the monomer or cofilin deveation rise above 5%
+            if abs(err1) > 5 or abs(err2) > 5:
+                raise DeviationTooHighError
+
+        if live_plot and n % self.plot_interval < 0.1 * dt:
+            self.live_plot(n)
+
+        self.iterate_values()
+
+    if self.completion_run: # Option to run simulation until tolerance is met
+            ...
+            checks = [
+                all(np.abs(p - p_p) < tolerance),
+                all(np.abs(m - m_p) < tolerance),
+                all(np.abs(cf - cf_p) < tolerance),
+                all(np.abs(cb - cb_p) < tolerance),
+            ]
+            completed = all(checks)
+            ...
+    
+    self.final_plot(t[-1])
+    return p, m, cf, cb, x, t
+
+```
+
+And that's it! With some plotting code, we get animations like the one above, or the following, which corresponds to a periodic boundary condition:
+
+
+<img  src="/projects_media/actin-cortex/periodic.gif"/>
+
 </MarkdownLayout>
 
