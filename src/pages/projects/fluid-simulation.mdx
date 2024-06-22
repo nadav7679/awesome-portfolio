@@ -5,7 +5,7 @@ import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
 
 <img  src="/projects_media/fluid-simulation/streamlines.gif"/>
 
-Recently, at Imperial, I took a module about basic Fluid Dynamics (from a mathematical perspective). Our lecturer showed that under certain conditions, 2D fluid flow can be described fully using a complex function called "stream function". Then, in an assignment, there was a bonus question about researching a particular type of flow (quadruple flow). We could carry out the research however we'd like, so I thought about trying to visualize it using Python and Manim (3b1b package). The result was so beautiful that I just had to share it!
+Recently, at Imperial, I took a module about basic Fluid Dynamics (from a mathematical perspective). Our lecturer showed that under certain conditions, 2D fluid flow can be described fully using a complex function called "stream function". Then, in an assignment, there was a bonus question about researching a particular type of flow (quadruple flow). We could carry out the research however we'd like, so I thought about trying to visualize it using Python and Manim (3Blue1Brown package). The result was so beautiful that I just had to share it!
 
 As an example, you can see the following fluid flow for a fluid going in constant motion around a circle. Imagine that the circle is spinning with some angular velocity $\Gamma$. Then our stream function $\psi(r, \theta)$, described using polar coordinates $r, \theta$, can be written as follows:
 
@@ -17,8 +17,8 @@ For it, we find the following flow (here $\Gamma$ is big, imagine that the circl
 <img  src="/projects_media/fluid-simulation/streamlines2.gif"/>
 
 
-# Calculating cartesian velocity from stream function
-To visualize the flow, we need to derive the Cartesian velocity components $u(x,y), v(x,y)$ from the stream function $\psi(r, \theta)$ (we need that because Manim takes in Cartesian coordinates). Doing this by hand can be terrible; it involves replacing $r, \theta$ with $x^2 + y^2, \text{atan}(y/x)$ respectively, and then differentiating with respect to x and y! From experience, it is terrible. The good news is that we can do it using sympy!
+# Calculating Cartesian Velocity from Stream Function
+To visualize the flow, we need to derive the Cartesian velocity components $u(x,y), v(x,y)$ from the stream function $\psi(r, \theta)$ (we need that because Manim takes in Cartesian coordinates). Doing this by hand can be terrible; it involves replacing $r, \theta$ with $x^2 + y^2, \text{atan}(y/x)$ respectively, and then differentiating with respect to x and y! A messy an unpleasent calculation. The good news is that we can do it using sympy!
 <br></br>
 
 ```python
@@ -48,7 +48,7 @@ class StreamFunction:
 
 ```
 
-Here, StreamFunction takes a sympy expression of $\psi$ in polar coordinates, which is then supplied in coord. A suitable instance is this:
+Here, StreamFunction takes a Sympy expression of $\psi$ in polar coordinates, which is then supplied in coord. An example instance is as follows:
 
 
 ```python
@@ -120,7 +120,7 @@ class Streamlines(Scene):
 In here, note that we first initialize a StreamFunction instance, then get its Cartesian velocity components u, v, and use them to define the `velocity_field`, which is in mathematical notation $\vec{V}(x,y)$. The velocity field also has a "black hole" in the middle because we don't want to calculate stuff for $r=0$! Also, it helps to visualize the physics that we work with, that there is a rotating circle in the center of a uniformly flowing field.
 <br></br>
 
-That's it! I hope you'll play around with it and get some awesome fluid animations! In the meantime, here are some of mine:
+That's it! I hope you'll play around with it and create some awesome fluid animations! In the meantime, here are some of mine:
 
 Here the "disc" at the center is rotating incredibly fast (large $\Gamma$):
 <img  src="/projects_media/fluid-simulation/case_d.png"/>

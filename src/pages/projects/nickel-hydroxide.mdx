@@ -2,9 +2,9 @@ import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
 
 
 <MarkdownLayout headline="Capturing a the dynamics of a battery, <strong>&nbspwith mathematics</strong>.">
-In one of my two undergrad senior year reseach projects, I present a mean-field model of the nickel-hydroxide (Ni(OH)2) electrode in the Edison rechargeable battery. The model aims to describe the electrode's dynamics, charge transport, and phase separation. The Poisson-Nernst-Planck equation is used to describe the charge transport, while the Cahn-Hilliard approach is used to model the phase separation. Then, the model equations are solved numerically. Before I'll present the project, let's see an importent permilmeniry work I did.
+In one of my two undergrad senior year research projects, I present a mean-field model of the nickel-hydroxide (Ni(OH)2) electrode in the Edison rechargeable battery. The model aims to describe the electrode's dynamics, charge transport, and phase separation. The Poisson-Nernst-Planck equation is used to describe the charge transport, while the Cahn-Hilliard approach is used to model the phase separation. Then, the model equations are solved numerically. Before presenting the project, let's first discuss an important permilmeniry work I conducted.
 
-# Numerically solving the PNP equations
+# Numerically Solving the PNP Equations
 While my advisor and I were working on the mathematical model, I also tried to tackle my first numerical problem - solving the Poission Nernst Planck equations. I provided quite a detailed solution, which I will present here.
 
 
@@ -82,7 +82,7 @@ def get_phi(phi_0, phi_M, n, p, dx, n_l=0, n_r=0):
     return phi
 ```
 
-Together with finding $\phi$, we need to iterate $p(x,t), n(x,t)$. It means finding $p_m^{i+1}, n_m^{i+1}$. We assume that we have $p_m^j, n_m^j$ for every $m, j<i$.
+Together with finding $\phi$, we need to iterate $p(x,t), n(x,t)$. This involves finding $p_m^{i+1}, n_m^{i+1}$ for each $m, j<i$. We assume that we have $p_m^j, n_m^j$ for every $m, j<i$.
 I will use explicit central difference method to get:
 $$
 \begin{align}
@@ -140,7 +140,7 @@ def iterate_concentration(c, phi, dx, dt, positive, flux_l=0, flux_r=0, neumann=
 This eventually, results in this beautiful animation
 <img  src="/projects_media/nickel-hydroxide/pnp.gif"/>
 
-# The actual nickel-hydroxide project
+# Nickel-Hydroxide Project
 
 We started from a different set of mathematical equations, but quickly realized that we have to modify the mathematical model to our specific setup. Eventually, the model equations took the following form:
 
@@ -157,12 +157,12 @@ $$
 Essentialy, the equations describe the motion of the ions inside the solution, affected by diffusion, electric forces, and concentration gradients. 
 A full description of the model, its parameters, and the code, can be found <a class="textlink" href="https://github.com/nadav7679/phase_field_Ni_batteries/blob/main/Mean_field_of_nickel_hydroxide_electrode_in_Edison_rechargeable_battery_final.pdf">in my GitHub</a>.  
 
-An essential part of the dynamcis is the phase-transition the material goes through (this was modeled with Cahn-Hilliard equations). We can see this dynamics in action in the following figure:
+An essential part of the dynamics is the phase-transition the material undergoes (modeled with Cahn-Hilliard equations). We can observe this dynamic process in action in the following figure:
 <img class="w-10/12" src="/projects_media/nickel-hydroxide/nickel.jpg"/>
 
 The figure was created in MatLab and it shows a Space-time plot with an input electron flux (to the electrode) from the right. The different phases are Purple - ${Ni(OH)_2}$, Blue - ${NiOOH}$. Over time, the ${Ni(OH)_2}$ phase takes over the material and the interface moves to the left edge.
 
-After I had to submit the project and continue with my studies, my advisor informed me that he and his fellows developed upon my work a 2D model, that gave them the exact behaviour they looked for (which I will not detail here). Hopefully I will be able to help their efforts and advance their research, so we could publish permilmeniry results in the upcoming couple of yars.
+After submitting the project and continuing with my studies, my advisor informed me that he and his colleagues further developed my work into a 2D model, achieving the exact behavior they sought. I hope to continue supporting their efforts and contribute to their research, aiming to publish preliminary results in the upcoming couple of years.
 
 
 </MarkdownLayout>
