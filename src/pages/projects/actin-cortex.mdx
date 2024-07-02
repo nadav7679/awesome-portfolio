@@ -17,13 +17,38 @@ To solve the model equations numerically, I used a finite difference method that
 The discretized equations:
 
 $$
-
-\begin{align}
-    p_i^{n+1} &= p_i - \frac{\Delta t}{\Delta x} \cdot v (p_{i} - p_{i-1}) - Depoly \\
-    m_i^{n+1} &= m_i + D_m \frac{\Delta t}{2 \Delta x^2} \big[(2 - \beta (p_i + p_{i+1}))(m_{i+1}-m_i) \nonumber \\ &\quad - (2 - \beta (p_i + p_{i-1}))(m_{i}-m_{i-1}) \big] + Depoly \\
-    c_{f,i}^{n+1} &= c_{f, i} + D_c \frac{\Delta  t}{\Delta x^2} (c_{f, i+1} + c_{f, i-1} - 2 c_{f, i}) - Bind + Depoly \\
-    c_{b,i}^{n+1} &= c_{b, i} - v \frac{\Delta  t}{\Delta x} (c_{b, i} - c_{b, i-1}) + Bind - Depoly
-\end{align}
+\begin{equation}
+    \begin{aligned}
+        p_i^{n+1} =& p_i - \frac{\Delta t}{\Delta x} \cdot v (p_{i} - p_{i-1}) \\ &- Depoly
+    \end{aligned}
+\end{equation}
+$$
+$$
+\begin{equation}
+    \begin{aligned}
+        m_i^{n+1} =& m_i + D_m \frac{\Delta t}{2 \Delta x^2} \\
+            &\big[(2 - \beta (p_i + p_{i+1}))(m_{i+1}-m_i) \quad  \\
+            &- (2 - \beta (p_i + p_{i-1}))(m_{i}-m_{i-1}) \big] \\
+            &+ Depoly
+    \end{aligned}
+\end{equation}
+$$
+$$
+\begin{equation}
+    \begin{aligned}
+        c_{f,i}^{n+1} &= c_{f, i} + D_c \frac{\Delta  t}{\Delta x^2} \times \\
+        &(c_{f, i+1} + c_{f, i-1} - 2 c_{f, i}) \\
+        &- Bind + Depoly
+    \end{aligned}
+\end{equation}
+$$
+$$
+\begin{equation}
+    \begin{aligned}
+        c_{b,i}^{n+1} &= c_{b, i} - v \frac{\Delta  t}{\Delta x} (c_{b, i} - c_{b, i-1}) \\
+        &+ Bind - Depoly
+    \end{aligned} \\
+\end{equation}
 $$
 Where:
 $$
@@ -37,7 +62,11 @@ $$
 Most of the boundary conditions were quite normal, except for one. The boundary condition for $m$ accounts for a significant part of the dynamics, namely, the polymerization (synthesis of $p$) on the edge. It required special treatment and turned out to be:
 $$
 \begin{equation}
-    m_0^{n+1} = m_0 + D_m \frac{\Delta t}{2 \Delta x^2} \big[(2 - \beta (p_0 + p_{1}))(m_{1}-m_0) - (2 - \beta (p_0 + p_{-1}))(m_{0}-m_{-1}) \big] 
+    \begin{aligned}
+        m_0^{n+1} =& m_0 + D_m \frac{\Delta t}{2 \Delta x^2} \ \\
+        &\big[(2 - \beta (p_0 + p_{1}))(m_{1}-m_0) \\
+        &- (2 - \beta (p_0 + p_{-1}))(m_{0}-m_{-1}) \big] 
+    \end{aligned}
 \end{equation}
 $$
 With $p_{-1}=p_{0}$.

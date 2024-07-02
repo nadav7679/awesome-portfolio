@@ -10,11 +10,11 @@ export default function Nav() {
       {/* GitHub-Linkedin logo-link */}
       <div className="flex justify-start basis-30">
         <a href="https://www.linkedin.com/in/nadav7679/">
-          <FaLinkedin size={50} />
+          <FaLinkedin size={50} className="md:mb-0 h-[40px] w-[40px] md:h-[50px] md:w-[50px] ml-0 md:ml-10"/>
         </a>
 
         <a href="https://github.com/nadav7679">
-          <FaGithub size={50} />
+          <FaGithub size={50} className="md:mb-0 h-[40px] w-[40px] md:h-[50px] md:w-[50px] ml-0 md:ml-10"/>
         </a>
       </div>
 
@@ -33,7 +33,7 @@ export default function Nav() {
         <span className="block h-0.5 w-8 bg-black"></span>
         <span className="block h-0.5 w-8 bg-black"></span> */}
 
-        <FaBars size={30} />
+        <FaBars size={30} className="md:mb-0 h-[40px] w-[80px] md:h-[50px] md:w-[100px] ml-0 md:ml-10"/>
       </div>
 
       {toggled && (
