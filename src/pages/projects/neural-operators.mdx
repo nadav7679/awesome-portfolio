@@ -1,0 +1,85 @@
+import MarkdownLayout from '../../layouts/MarkdownLayout.astro'
+
+
+<MarkdownLayout headline="Predicting PDEs with<strong>&nbspdeep neural networks&nbsp</strong>.">
+
+# Introduction
+
+Machine learning, and in particular Deep Neural Networks (DNNs), have empirically proven successful in diverse applications, such as image classification, natural language processing, text-to-speech, and more. Mathematically, most of these problems can be formulated as approximating maps between finite-dimensional spaces, e.g. image classification can be thought of
+as a mapping between the space of possible pixel values to labels. Nevertheless, many problems
+require a more general, infinite-dimensional setting. These problems are concerned with oper-
+ators, which are maps between infinite-dimensional spaces. A prominent example of operator
+problems is Partial Differential Equations (PDEs) that lack analytical solutions. To answer
+these problems, a machine learning method for approximating operators, termed “operator
+learning”, has been developed for quite some time. <br></br>
+
+A few DNN architectures and theories have been proposed for operator learning, first appear-
+ing in 1995 [2]. More recent work has introduced architectures such as Multiwavelet networks
+[3], DeepONetworks [4], and Neural Operators [7]. <br></br>
+
+This work will be based on the latter “Neural Operator” approach, first proposed as Graph
+and Fourier Neural Operators [5] [6], and developed further in [1] [7]. The neural operator architecture can be mathematically formulated as,
+
+$$
+\begin{equation*}
+    \begin{aligned}
+        \mathcal{N}&: \mathcal{A} \rightarrow \mathcal{U} \\
+        \mathcal{N} &:= \mathcal{Q} \circ \mathcal{L}_{L} \circ ... \circ \mathcal{L}_1 \circ \mathcal{R}
+    \end{aligned}
+\end{equation*}
+$$
+
+$$
+\begin{equation*}
+    (\mathcal{L}_l \boldsymbol{v}) (x) :=  \sigma \left( W_l\boldsymbol{v}(x) + \boldsymbol{b}_l + \sum^{M}_{m=1} \langle T_{l,m}\boldsymbol{v} (x), \psi_m (x) \rangle_{L^2} \psi(x) \right) \, , 
+\end{equation*}
+$$
+
+where we leave the detailed explanation of these equations to the full thesis (link below). We aim to describe this
+construction under the finite element method, taking advantage of its extensively researched
+theory and software. Instead of discretizing functions in the usual sense, we represent them as
+coefficients in the function basis of a finite element space, thus providing an explicit formula
+for the calculations that compose the neural operator. <br></br>
+
+Ultimately, we have three broad goals; the first is to replicate known results of neural
+operators in our finite element framework. Second, we wish to discover relations between the
+architecture of neural operators, i.e. their hyperparameters, and how well they approximate a
+given problem. These would shed light on how to optimize a neural operator to a particular
+problem or need. Third, we want to characterize some limitations of the architecture and
+criticize it. <br></br>
+
+Hopefully, one could consult the limitations we present before deciding on a neural operator
+as an approximation method to a complicated PDE, and gain insights from the relations we
+unravel if they do attempt to use it.
+
+<a href="/projects_media/neural-operators/NadavPortThesis.pdf" class="textlink text-center text-3xl flex items-center justify-center">Click here to view the full thesis!</a>
+
+# Refrences
+[1] S. Lanthaler, Z. Li, and A. M. Stuart, The Nonlocal Neural Operator: Universal
+Approximation (Version 1), arXiv, 2023, http://doi.org/10.48550/ARXIV.2304.13221. <br></br>
+
+[2] T. Chen and H. Chen, Universal approximation to nonlinear operators by neural net-
+works with arbitrary activation functions and its application to dynamical systems, IEEE
+Trans. Neural Networks, 6 (1995), pp. 911–917, https://doi.org/10.1109/72.392253. <br></br>
+
+[3] G. Gupta, X. Xiao, and P. Bogdan, Multiwavelet-based Operator Learning for Differ-
+ential Equations (Version 2), arXiv, 2021, http://doi.org/10.48550/ARXIV.2109.13459. <br></br>
+
+[4] L. Lu, P. Jin, G. Pang, Z. Zhang, and G. E. Karniadakis, Learning nonlinear
+operators via DeepONet based on the universal approximation theorem of operators, Nature
+Mach. Intell., 3 (2021), pp. 218–229, https://doi.org/10.1038/s42256-021-00302-5. <br></br>
+
+[5] Z. Li, N. Kovachki, K. Azizzadenesheli, B. Liu, K. Bhattacharya, A. Stuart,
+and A. Anandkumar, Neural Operator: Graph Kernel Network for Partial Differential
+Equations (Version 1), arXiv, 2020, http://doi.org/10.48550/ARXIV.2003.03485. <br></br>
+
+[6] Z. Li, N. Kovachki, K. Azizzadenesheli, B. Liu, K. Bhattacharya, A. Stu-
+art, and A. Anandkumar, Fourier Neural Operator for Parametric Partial Differential
+Equations (Version 3), arXiv, 2020, http://doi.org/10.48550/ARXIV.2010.08895. <br></br>
+
+[7] N. Kovachki, Z. Li, B. Liu, K. Azizzadenesheli, K. Bhattacharya, A. Stu-
+art, and A. Anandkumar, Neural Operator: Learning Maps Between Function Spaces
+(Version 6), arXiv, 2021, http://doi.org/10.48550/ARXIV.2108.08481.
+
+</MarkdownLayout>
+
