@@ -43,6 +43,7 @@ export default function Nav() {
         >
           <div className="flex flex-col gap-12 text-3xl basis-30">
             <a href="/" className="flex"> <FaHome /> &nbsp; About</a>
+            <a href="/projects/neural-operators" className="flex">Thesis - Neural Operators</a>
             <a href="/projects/fluid-simulation" className="flex">Fluid Flow</a>
             <a href="/projects/actin-cortex" className="flex">Actin-Cortex</a>
             <a href="/projects/nickel-hydroxide" className="flex">Battery Phase Transition</a>
