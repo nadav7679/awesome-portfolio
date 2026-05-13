@@ -50,7 +50,7 @@ export default function Nav() {
             <a href="/projects/feed-forward" className="flex">Feed-Forward Network</a>
             <a href="/projects/wr-chaos" className="flex">Chemical Reactions Chaos</a>
             <a href="/projects/argo" className="flex">Data Workflows</a>
-            <a href="/projects/security_layer" className="flex">OICD Security</a>
+            <a href="/projects/security-layer" className="flex">OICD Security</a>
 
 
             
